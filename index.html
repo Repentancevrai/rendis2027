@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RENDIS 2027 — Grand-Bassam</title>
+  <meta name="description" content="RENDIS 2027 — Contribution et mobilisation pour le projet de Grand-Bassam.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#accueil">RENDIS <span>2027</span></a>
+      <nav>
+        <a href="#projet">Le projet</a>
+        <a href="#contribuer">Contribuer</a>
+        <a href="#impact">Notre objectif</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-small" href="#contribuer">Je contribue</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">RENDIS 2027 • GRAND-BASSAM</p>
+          <h1>Ensemble, faisons grandir <span>le projet.</span></h1>
+          <p class="lead">
+            Une mobilisation solidaire pour soutenir le projet RENDIS 2027.
+            Chaque contribution compte et chaque geste nous rapproche de l'objectif.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#contribuer">Contribuer maintenant</a>
+            <a class="btn btn-ghost" href="#projet">Découvrir le projet</a>
+          </div>
+          <div class="trust-row">
+            <span>✓ Contribution enregistrée</span>
+            <span>✓ Vérification par l'équipe</span>
+            <span>✓ Suivi du projet</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="star">★</div>
+          <p>OBJECTIF RENDIS 2027</p>
+          <strong>60 000 000 FCFA</strong>
+          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="progress-label"><span id="amountRaised">0 FCFA</span><span>60 000 000 FCFA</span></div>
+          <small>Montant affiché selon les contributions validées.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="projet" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">LE PROJET</p>
+          <h2>Une vision portée ensemble</h2>
+          <p>RENDIS 2027 rassemble les forces de la communauté autour d'un objectif commun, avec transparence, responsabilité et solidarité.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon">01</div><h3>Mobiliser</h3><p>Créer une dynamique de participation autour du projet dans les communautés.</p></article>
+          <article class="card"><div class="icon">02</div><h3>Contribuer</h3><p>Permettre à chacun d'apporter sa contribution selon ses possibilités.</p></article>
+          <article class="card"><div class="icon">03</div><h3>Suivre</h3><p>Enregistrer les contributions et permettre leur vérification par l'équipe.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact" class="section section-soft">
+      <div class="container impact-grid">
+        <div>
+          <p class="eyebrow">NOTRE OBJECTIF</p>
+          <h2>60 millions FCFA</h2>
+          <p>Objectif global de mobilisation pour RENDIS 2027. Les chiffres publics peuvent être mis à jour à partir des contributions validées.</p>
+        </div>
+        <div class="stats">
+          <div><strong id="validatedCount">0</strong><span>contributions validées</span></div>
+          <div><strong id="pendingCount">0</strong><span>en attente de vérification</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribuer" class="section">
+      <div class="container form-wrap">
+        <div class="section-heading">
+          <p class="eyebrow">JE CONTRIBUE</p>
+          <h2>Enregistrer une contribution</h2>
+          <p>Remplissez le formulaire. Votre contribution sera enregistrée avec le statut « À vérifier ».</p>
+        </div>
+
+        <form id="contributionForm" class="form">
+          <label>Nom complet<input name="name" required maxlength="120" placeholder="Votre nom complet"></label>
+          <label>Téléphone<input name="phone" required maxlength="30" placeholder="+225 ..."></label>
+          <label>Montant (FCFA)<input name="amount" required type="number" min="1" step="1" placeholder="10000"></label>
+          <label>Référence du paiement (facultatif)<input name="reference" maxlength="120" placeholder="Référence / numéro de transaction"></label>
+          <label>Commentaire (facultatif)<textarea name="message" rows="4" maxlength="500" placeholder="Un message pour l'équipe..."></textarea></label>
+          <button class="btn" type="submit">Enregistrer ma contribution</button>
+          <p id="formMessage" class="form-message" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-dark">
+      <div class="container contact">
+        <div>
+          <p class="eyebrow">RENDIS 2027</p>
+          <h2>Merci de participer à l'œuvre.</h2>
+          <p>Les informations de paiement et les coordonnées officielles seront ajoutées lorsque les comptes de paiement seront prêts.</p>
+        </div>
+        <a class="btn btn-light" href="#contribuer">Contribuer</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">© 2027 RENDIS — Grand-Bassam. Tous droits réservés.</div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
