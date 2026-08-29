@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Administration | RENDIS 2027</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Configuration -->
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+  <main class="admin-login-page">
+
+    <section class="admin-login-card">
+
+      <div class="admin-logo">
+        R
+      </div>
+
+      <h1>Administration</h1>
+
+      <p class="admin-subtitle">
+        RENDIS 2027
+      </p>
+
+      <p class="admin-description">
+        Accès réservé aux administrateurs autorisés.
+      </p>
+
+      <form id="adminLoginForm">
+
+        <label for="adminEmail">
+          Adresse e-mail
+        </label>
+
+        <input
+          type="email"
+          id="adminEmail"
+          required
+          autocomplete="email"
+          placeholder="Votre adresse e-mail"
+        >
+
+        <label for="adminPassword">
+          Mot de passe
+        </label>
+
+        <input
+          type="password"
+          id="adminPassword"
+          required
+          autocomplete="current-password"
+          placeholder="Votre mot de passe"
+        >
+
+        <button type="submit">
+          Se connecter
+        </button>
+
+        <p id="adminMessage" class="admin-message"></p>
+
+      </form>
+
+      <a href="index.html" class="back-home">
+        ← Retour au site
+      </a>
+
+    </section>
+
+  </main>
+
+  <script src="admin.js"></script>
+
+</body>
+</html>
