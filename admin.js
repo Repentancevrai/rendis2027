@@ -67,12 +67,48 @@ form.addEventListener("submit", async (event) => {
 
     return;
   }
+if (data.user) {
+    // Vérifier le rôle de l'utilisateur connecté
+    const { data: profile, error: profileError } = await supabaseClient
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
 
-  if (data.user) {
-    showMessage("Connexion réussie ! Bienvenue dans l'administration.", "success");
+    // Vérification du profil
+    if (profileError || !profile) {
+        console.error(profileError);
 
-    // Pour l'instant, nous confirmons simplement la connexion.
-    // La prochaine étape sera la création du tableau de bord administrateur.
-    console.log("Administrateur connecté :", data.user.email);
-  }
+        showMessage(
+            "Impossible de vérifier vos autorisations.",
+            "error"
+        );
+
+        await supabaseClient.auth.signOut();
+        return;
+    }
+
+    // Vérification du rôle administrateur
+    if (profile.role !== 'admin') {
+        showMessage(
+            "Accès refusé. Vous n'avez pas les droits administrateur.",
+            "error"
+        );
+
+        await supabaseClient.auth.signOut();
+        return;
+    }
+
+    // Connexion administrateur réussie
+    showMessage(
+        "Connexion réussie ! Bienvenue dans l'administration RENDIS 2027.",
+        "success"
+    );
+
+    console.log(
+        "Administrateur connecté :",
+        data.user.email
+    );
+}
+  
 });
