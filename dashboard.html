@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Administration | RENDIS 2027</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Configuration -->
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+  <main class="dashboard-page">
+
+    <header class="dashboard-header">
+      <div>
+        <div class="admin-logo">R</div>
+        <div>
+          <h1>Tableau de bord</h1>
+          <p>Administration RENDIS 2027</p>
+        </div>
+      </div>
+
+      <button id="logoutBtn" type="button">
+        Déconnexion
+      </button>
+    </header>
+
+
+    <section class="dashboard-welcome">
+      <h2>Bienvenue dans l'administration</h2>
+      <p id="adminWelcome">
+        Chargement...
+      </p>
+    </section>
+
+
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <span class="stat-label">Montant collecté</span>
+        <strong id="totalAmount">0 FCFA</strong>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Contributions</span>
+        <strong id="totalContributions">0</strong>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">À vérifier</span>
+        <strong id="pendingContributions">0</strong>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Objectif RENDIS 2027</span>
+        <strong>60 000 000 FCFA</strong>
+      </article>
+
+    </section>
+
+
+    <section class="dashboard-section">
+
+      <div class="section-title">
+        <div>
+          <h2>Contributions récentes</h2>
+          <p>Les dernières contributions enregistrées</p>
+        </div>
+      </div>
+
+      <div id="contributionsList">
+        <p class="loading-text">
+          Chargement des contributions...
+        </p>
+      </div>
+
+    </section>
+
+
+    <a href="index.html" class="back-home">
+      ← Retour au site
+    </a>
+
+  </main>
+
+
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
