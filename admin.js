@@ -68,47 +68,28 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 if (data.user) {
-    // Vérifier le rôle de l'utilisateur connecté
-    const { data: profile, error: profileError } = await supabaseClient
-        .from('profiles')
-        .select('role')
-        .eq('id', data.user.id)
-        .single();
+  // Vérification directe de l'adresse e-mail administrateur
+  const ADMIN_EMAIL = "rendis2027bassam@gmail.com";
 
-    // Vérification du profil
-    if (profileError || !profile) {
-        console.error(profileError);
-
-        showMessage(
-            "Impossible de vérifier vos autorisations.",
-            "error"
-        );
-
-        await supabaseClient.auth.signOut();
-        return;
-    }
-
-    // Vérification du rôle administrateur
-    if (profile.role !== 'admin') {
-        showMessage(
-            "Accès refusé. Vous n'avez pas les droits administrateur.",
-            "error"
-        );
-
-        await supabaseClient.auth.signOut();
-        return;
-    }
-
-    // Connexion administrateur réussie
+  if (data.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
     showMessage(
-        "Connexion réussie ! Bienvenue dans l'administration RENDIS 2027.",
-        "success"
+      "Accès refusé. Vous n'avez pas les droits administrateur.",
+      "error"
     );
 
-    console.log(
-        "Administrateur connecté :",
-        data.user.email
-    );
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  // Connexion administrateur réussie
+  showMessage(
+    "Connexion réussie ! Bienvenue dans l'administration RENDIS 2027.",
+    "success"
+  );
+
+  console.log(
+    "Administrateur connecté :",
+    data.user.email
+  );
 }
-  
 });
