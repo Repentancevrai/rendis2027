@@ -168,46 +168,36 @@ async function loadDashboardStats() {
         }
 
 
-        const contributions = data || [];
 
+const contributions = données || [];
 
-        // Nombre total de contributions
-        const total =
-            contributions.length;
+// Contributions validées uniquement
+const contributionsValidees = contributions.filter(
+    contribution => contribution.statut === "VALIDE"
+);
 
+// Nombre de contributions validées
+const total = contributionsValidees.length;
 
-        // Montant total
-        const amount =
-            contributions.reduce(
-                (sum, contribution) => {
+// Montant total des contributions validées
+const montant = contributionsValidees.reduce(
+    (somme, contribution) => {
+        return somme + Number(contribution.montant || 0);
+    },
+    0
+);
 
-                    const contributionAmount =
-                        Number(contribution.amount) || 0;
-
-                    return sum + contributionAmount;
-
-                },
-                0
-            );
-
-
-        // Contributions à vérifier
-        const pending =
-            contributions.filter(
-                contribution => {
-
-                    return contribution.status ===
-                        "A_VERIFIER";
-
-                }
-            ).length;
+// Contributions à vérifier
+const enAttente = contributions.filter(
+    contribution => contribution.statut === "A_VERIFIER"
+).length;
 
 
         // Affichage du montant total
         if (totalAmount) {
 
             totalAmount.textContent =
-                amount.toLocaleString("fr-FR") +
+                montant.toLocaleString("fr-FR") +
                 " FCFA";
 
         }
@@ -226,7 +216,7 @@ async function loadDashboardStats() {
         if (pendingContributions) {
 
             pendingContributions.textContent =
-                pending;
+           enAttente;
 
         }
 
