@@ -86,10 +86,14 @@ if (data.user) {
     "Connexion réussie ! Bienvenue dans l'administration RENDIS 2027.",
     "success"
   );
+console.log(
+  "Administrateur connecté :",
+  data.user.email
+);
 
-  console.log(
-    "Administrateur connecté :",
-    data.user.email
-  );
+setTimeout(() => {
+  window.location.href = "dashboard.html";
+}, 800);
+  
 }
 });
