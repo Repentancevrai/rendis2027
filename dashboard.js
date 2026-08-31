@@ -2,12 +2,29 @@
 // RENDIS 2027 - TABLEAU DE BORD ADMIN
 // ==========================================
 
-// Vérification de la configuration Supabase
-if (typeof supabaseClient === "undefined") {
-    console.error("Supabase n'est pas configuré correctement.");
+// Configuration Supabase
+const cfg = window.RENDIS_CONFIG || {};
+
+let supabaseClient = null;
+
+if (
+    window.supabase &&
+    cfg.SUPABASE_URL &&
+    cfg.SUPABASE_ANON_KEY &&
+    !cfg.SUPABASE_URL.startsWith("PASTE_") &&
+    !cfg.SUPABASE_ANON_KEY.startsWith("PASTE_")
+) {
+    supabaseClient = window.supabase.createClient(
+        cfg.SUPABASE_URL,
+        cfg.SUPABASE_ANON_KEY
+    );
 }
 
-// Éléments de la page
+
+// ==========================================
+// ÉLÉMENTS DE LA PAGE
+// ==========================================
+
 const adminWelcome = document.getElementById("adminWelcome");
 const totalAmount = document.getElementById("totalAmount");
 const totalContributions = document.getElementById("totalContributions");
@@ -24,36 +41,78 @@ async function initDashboard() {
 
     try {
 
+        // Vérifier Supabase
+        if (!supabaseClient) {
+
+            if (adminWelcome) {
+                adminWelcome.textContent =
+                    "Erreur : configuration Supabase introuvable.";
+            }
+
+            return;
+        }
+
+
         // Vérifier si un administrateur est connecté
         const {
             data: { session },
             error
         } = await supabaseClient.auth.getSession();
 
+
         if (error || !session) {
+
             window.location.href = "admin.html";
+
             return;
         }
 
+
+        // Vérification de l'administrateur autorisé
+        const ADMIN_EMAIL = "rendis2027bassam@gmail.com";
+
+        if (
+            session.user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ) {
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href = "admin.html";
+
+            return;
+        }
+
+
         // Afficher l'adresse de l'administrateur connecté
         if (adminWelcome) {
+
             adminWelcome.textContent =
                 `Connecté en tant que : ${session.user.email}`;
+
         }
+
 
         // Charger les statistiques
         await loadDashboardStats();
 
+
         // Charger les contributions
         await loadRecentContributions();
 
+
     } catch (error) {
 
-        console.error("Erreur tableau de bord :", error);
+        console.error(
+            "Erreur tableau de bord :",
+            error
+        );
 
         if (adminWelcome) {
+
             adminWelcome.textContent =
                 "Erreur de chargement du tableau de bord.";
+
         }
 
     }
@@ -73,35 +132,46 @@ async function loadDashboardStats() {
             .from("contributions")
             .select("*");
 
+
         if (error) {
+
             throw error;
+
         }
 
+
         const contributions = data || [];
+
 
         // Nombre total de contributions
         const total = contributions.length;
 
+
         // Montant total
-        const amount = contributions.reduce((sum, contribution) => {
+        const amount = contributions.reduce(
+            (sum, contribution) => {
 
-            const contributionAmount =
-                Number(contribution.amount) || 0;
+                const contributionAmount =
+                    Number(contribution.amount) || 0;
 
-            return sum + contributionAmount;
+                return sum + contributionAmount;
 
-        }, 0);
+            },
+            0
+        );
 
 
         // Contributions en attente
-        const pending = contributions.filter(contribution => {
+        const pending = contributions.filter(
+            contribution => {
 
-            return contribution.status === "A_VERIFIER";
+                return contribution.status === "A_VERIFIER";
 
-        }).length;
+            }
+        ).length;
 
 
-        // Affichage
+        // Affichage du montant total
         if (totalAmount) {
 
             totalAmount.textContent =
@@ -110,6 +180,7 @@ async function loadDashboardStats() {
         }
 
 
+        // Affichage du nombre total
         if (totalContributions) {
 
             totalContributions.textContent = total;
@@ -117,11 +188,13 @@ async function loadDashboardStats() {
         }
 
 
+        // Affichage des contributions à vérifier
         if (pendingContributions) {
 
             pendingContributions.textContent = pending;
 
         }
+
 
     } catch (error) {
 
@@ -136,7 +209,7 @@ async function loadDashboardStats() {
 
 
 // ==========================================
-// CHARGER LES CONTRIBUTIONS RECENTES
+// CHARGER LES CONTRIBUTIONS RÉCENTES
 // ==========================================
 
 async function loadRecentContributions() {
@@ -153,12 +226,16 @@ async function loadRecentContributions() {
 
 
         if (error) {
+
             throw error;
+
         }
 
 
         if (!contributionsList) {
+
             return;
+
         }
 
 
@@ -177,60 +254,67 @@ async function loadRecentContributions() {
 
 
         // Générer la liste
-        contributionsList.innerHTML = data.map(contribution => {
+        contributionsList.innerHTML = data.map(
+            contribution => {
 
-            const name =
-                contribution.name ||
-                contribution.full_name ||
-                contribution.contributor_name ||
-                "Contributeur";
-
-            const amount =
-                Number(contribution.amount || 0)
-                    .toLocaleString("fr-FR");
-
-            const status =
-                contribution.status || "A_VERIFIER";
-
-            const date = contribution.created_at
-                ? new Date(contribution.created_at)
-                    .toLocaleDateString("fr-FR")
-                : "";
+                const name =
+                    contribution.name ||
+                    contribution.full_name ||
+                    contribution.contributor_name ||
+                    "Contributeur";
 
 
-            return `
+                const amount =
+                    Number(contribution.amount || 0)
+                        .toLocaleString("fr-FR");
 
-                <div class="contribution-item">
 
-                    <div class="contribution-info">
+                const status =
+                    contribution.status ||
+                    "A_VERIFIER";
 
-                        <strong>${name}</strong>
 
-                        <span>
-                            ${date}
-                        </span>
+                const date =
+                    contribution.created_at
+                        ? new Date(
+                            contribution.created_at
+                        ).toLocaleDateString("fr-FR")
+                        : "";
+
+
+                return `
+
+                    <div class="contribution-item">
+
+                        <div class="contribution-info">
+
+                            <strong>${name}</strong>
+
+                            <span>
+                                ${date}
+                            </span>
+
+                        </div>
+
+                        <div class="contribution-amount">
+
+                            ${amount} FCFA
+
+                        </div>
+
+                        <div class="contribution-status">
+
+                            ${status}
+
+                        </div>
 
                     </div>
 
+                `;
 
-                    <div class="contribution-amount">
+            }
+        ).join("");
 
-                        ${amount} FCFA
-
-                    </div>
-
-
-                    <div class="contribution-status">
-
-                        ${status}
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
 
     } catch (error) {
 
@@ -260,29 +344,38 @@ async function loadRecentContributions() {
 
 
 // ==========================================
-// DECONNEXION
+// DÉCONNEXION
 // ==========================================
 
 if (logoutBtn) {
 
-    logoutBtn.addEventListener("click", async () => {
+    logoutBtn.addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await supabaseClient.auth.signOut();
+                if (supabaseClient) {
 
-            window.location.href = "admin.html";
+                    await supabaseClient.auth.signOut();
 
-        } catch (error) {
+                }
 
-            console.error(
-                "Erreur lors de la déconnexion :",
-                error
-            );
+
+                window.location.href = "admin.html";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur lors de la déconnexion :",
+                    error
+                );
+
+            }
 
         }
-
-    });
+    );
 
 }
 
