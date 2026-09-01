@@ -280,7 +280,7 @@ if (form) {
 
         const { error } =
           await supabaseClient
-            .from("orders ")
+            .from("contributions")
             .insert(payload);
 
 
