@@ -213,9 +213,21 @@ if (orderForm) {
       }
     } catch (error) {
       console.error("Erreur précommande :", error);
-      setMessage(orderMessage,
-        "Impossible d'enregistrer la précommande pour le moment. Vérifiez la connexion Supabase."
-      );
+
+      const code = clean(error?.code);
+      const message = clean(error?.message);
+      const details = clean(error?.details);
+      const hint = clean(error?.hint);
+
+      const diagnostic = [
+        "Erreur Supabase détectée.",
+        code ? `Code: ${code}` : "",
+        message ? `Message: ${message}` : "",
+        details ? `Détails: ${details}` : "",
+        hint ? `Conseil: ${hint}` : ""
+      ].filter(Boolean).join(" | ");
+
+      setMessage(orderMessage, diagnostic || "Erreur inconnue lors de l'enregistrement.");
     }
   });
 
@@ -292,9 +304,21 @@ if (contributionForm) {
       loadStats();
     } catch (error) {
       console.error("Erreur contribution :", error);
-      setMessage(contributionMessage,
-        "Impossible d'enregistrer la contribution. Vérifiez la connexion Supabase."
-      );
+
+      const code = clean(error?.code);
+      const message = clean(error?.message);
+      const details = clean(error?.details);
+      const hint = clean(error?.hint);
+
+      const diagnostic = [
+        "Erreur Supabase détectée.",
+        code ? `Code: ${code}` : "",
+        message ? `Message: ${message}` : "",
+        details ? `Détails: ${details}` : "",
+        hint ? `Conseil: ${hint}` : ""
+      ].filter(Boolean).join(" | ");
+
+      setMessage(contributionMessage, diagnostic || "Erreur inconnue lors de l'enregistrement.");
     }
   });
 }
