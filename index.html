@@ -53,10 +53,10 @@
    <form id="orderForm" class="form">
     <div class="form-grid"><label>Nom complet<input name="name" required maxlength="120" placeholder="Votre nom complet"></label><label>Téléphone<input name="phone" required maxlength="30" placeholder="+225 ..." autocomplete="tel"></label><label>Ville / secteur<input name="city" maxlength="120" placeholder="Grand-Bassam, Bonoua, Abidjan…"></label></div>
     <div class="order-row"><label>Pin Basique — 10 000 FCFA<input name="basiqueQty" type="number" min="0" step="1" value="0"></label><label>Pin Économique — 15 000 FCFA<input name="economiqueQty" type="number" min="0" step="1" value="0"></label><label>Pin Premium — 25 000 FCFA<input name="premiumQty" type="number" min="0" step="1" value="0"></label></div>
-    <div class="order-row order-row-two"><label>Pagne — 1 morceau (7 000 FCFA)<input name="pagnePieceQty" type="number" min="0" step="1" value="0"></label><label>Pagne — complet 3 morceaux (21 000 FCFA)<input name="pagneCompletQty" type="number" min="0" step="1" value="0"></label></div>
+    <div class="order-row order-row-two"><label>Pagne — 1 morceau (7 000 FCFA)<input name="pagnePieceQty" type="number" min="0" step="1" value="0"><label><label><" type= " min="0" step="1" value="0"></label></div>
     <div class="order-total"><span>Total de votre précommande</span><strong id="orderTotal">0 FCFA</strong></div>
     <fieldset class="payment-methods"><legend>Choisissez votre moyen de paiement</legend><label class="radio-card"><input type="radio" name="paymentMethod" value="NOWPAYMENTS" required><span><b>NOWPayments</b><small>Paiement en ligne / crypto via une page sécurisée.</small></span></label><label class="radio-card"><input type="radio" name="paymentMethod" value="DJAMO_BUSINESS"><span><b>Djamo Business</b><small>Paiement via le lien professionnel officiel RENDIS.</small></span></label></fieldset>
-    <label>Référence de paiement (si déjà disponible)<input name="reference" maxlength="120" placeholder="Référence de transaction"></label><label>Commentaire<textarea name="message" rows="3" maxlength="500" placeholder="Livraison, précision, etc."></textarea></label>
+    
     <button class="btn" type="submit">Enregistrer et continuer vers le paiement</button><p id="orderMessage" class="form-message" role="status"></p>
    </form>
   </div>
