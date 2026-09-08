@@ -106,9 +106,8 @@ const ORDER_PRICES = {
   economiqueQty: 15000,
   premiumQty: 25000,
   pagnePieceQty: 7000,
-  
-};
 
+};
 const ORDER_LABELS = {
   basiqueQty: "Pin Basique",
   economiqueQty: "Pin Économique",
@@ -116,7 +115,6 @@ const ORDER_LABELS = {
   pagnePieceQty: "Pagne 1 morceau",
   
 };
-
 function getOrderData() {
   if (!orderForm) return { total: 0, items: [] };
 
