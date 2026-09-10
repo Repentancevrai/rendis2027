@@ -212,6 +212,7 @@ if (contributionForm) {
       phone: clean(fd.get("phone")),
       amount: Number(fd.get("amount")) || 0,
       reference: clean(fd.get("reference")) || null,
+payment_method: method,
       message: [
         "[CONTRIBUTION]",
         city ? `Ville: ${city}` : "",
