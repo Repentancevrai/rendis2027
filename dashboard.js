@@ -439,7 +439,7 @@ async function updateContributionStatus(
         const confirmation =
             confirm(
 
-                newStatus === "VALIDEE"
+                newStatus === "VALIDE"
 
                     ? "Voulez-vous vraiment valider cette contribution ?"
 
@@ -480,7 +480,7 @@ async function updateContributionStatus(
         // Message de confirmation
         alert(
 
-            newStatus === "VALIDEE"
+            newStatus === "VALIDE"
 
                 ? "Contribution validée avec succès."
 
