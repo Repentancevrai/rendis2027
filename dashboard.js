@@ -182,7 +182,7 @@ const total = contributionsValidees.length;
 // Montant total des contributions validées
 const montant = contributionsValidees.reduce(
     (somme, contribution) => {
-        return somme + Number(contribution.montant || 0);
+        return somme + Number(contribution.amount || 0);
     },
     0
 );
