@@ -325,7 +325,7 @@ async function loadRecentContributions() {
 
                                 <button
                                     class="validate-btn"
-                                    onclick="updateContributionStatus('${contribution.id}', 'VALIDEE')"
+                                    onclick="updateContributionStatus('${contribution.id}', 'VALIDE')"
                                 >
                                     ✓ Valider
                                 </button>
