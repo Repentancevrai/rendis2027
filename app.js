@@ -230,38 +230,16 @@ payment_method: method,
       return;
     }
     try {
-  setMessage(contributionMessage, "Enregistrement en cours...");
-
-  const { data: contribution, error } = await supabaseClient
-    .from("contributions")
-    .insert(payload)
-    .select("id")
-    .single();
-
-  if (error) throw error;
-
-  // ============================
-// PAIEMENT APRÈS ENREGISTREMENT
-// ============================
-
-if (method === "NOWPAYMENTS") {
-  window.location.href = cfg.NOWPAYMENTS_PAYMENT_LINK;
-  return;
-}
-  
-
-  // ============================
-  // AUTRES MOYENS DE PAIEMENT
-  // ============================
-  contributionForm.reset();
-
-  setMessage(
-    contributionMessage,
-    "Merci ! Votre contribution a été enregistrée et sera vérifiée par l'équipe."
-  );
-
-  loadStats();
-}
+      setMessage(contributionMessage, "Enregistrement en cours...");
+      const { error } = await supabaseClient
+        .from("contributions")
+        .insert(payload);
+      if (error) throw error;
+      contributionForm.reset();
+      setMessage(contributionMessage,
+        "Merci ! Votre contribution a été enregistrée et sera vérifiée par l'équipe."
+      );
+      loadStats();
     } catch (error) {
       console.error("Erreur contribution :", error);
       const code = clean(error?.code);
