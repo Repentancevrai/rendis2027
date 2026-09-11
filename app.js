@@ -241,47 +241,14 @@ payment_method: method,
   if (error) throw error;
 
   // ============================
-  // NOWPAYMENTS AUTOMATIQUE
-  // ============================
-  if (method === "NOWPAYMENTS") {
-    setMessage(
-      contributionMessage,
-      "Création de votre paiement sécurisé..."
-    );
+// PAIEMENT APRÈS ENREGISTREMENT
+// ============================
 
-    const response = await fetch(
-      `${cfg.SUPABASE_URL}/functions/v1/create-nowpayments-payment`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: cfg.SUPABASE_ANON_KEY
-        },
-        body: JSON.stringify({
-          contribution_id: contribution.id,
-          amount_fcfa: Number(payload.amount)
-        })
-      }
-    );
-
-    const result = await response.json();
-
-    if (!response.ok || !result.ok || !result.invoice_url) {
-      console.error(
-        "Erreur création paiement NOWPayments:",
-        result
-      );
-
-      throw new Error(
-        result.error ||
-        "Impossible de créer le paiement NOWPayments."
-      );
-    }
-
-    // Redirection vers la facture unique
-    window.location.href = result.invoice_url;
-    return;
-  }
+if (method === "NOWPAYMENTS") {
+  window.location.href = cfg.NOWPAYMENTS_PAYMENT_LINK;
+  return;
+}
+  
 
   // ============================
   // AUTRES MOYENS DE PAIEMENT
