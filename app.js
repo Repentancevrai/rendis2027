@@ -230,16 +230,71 @@ payment_method: method,
       return;
     }
     try {
-      setMessage(contributionMessage, "Enregistrement en cours...");
-      const { error } = await supabaseClient
-        .from("contributions")
-        .insert(payload);
-      if (error) throw error;
-      contributionForm.reset();
-      setMessage(contributionMessage,
-        "Merci ! Votre contribution a été enregistrée et sera vérifiée par l'équipe."
+  setMessage(contributionMessage, "Enregistrement en cours...");
+
+  const { data: contribution, error } = await supabaseClient
+    .from("contributions")
+    .insert(payload)
+    .select("id")
+    .single();
+
+  if (error) throw error;
+
+  // ============================
+  // NOWPAYMENTS AUTOMATIQUE
+  // ============================
+  if (method === "NOWPAYMENTS") {
+    setMessage(
+      contributionMessage,
+      "Création de votre paiement sécurisé..."
+    );
+
+    const response = await fetch(
+      `${cfg.SUPABASE_URL}/functions/v1/create-nowpayments-payment`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: cfg.SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({
+          contribution_id: contribution.id,
+          amount_fcfa: Number(payload.amount)
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok || !result.invoice_url) {
+      console.error(
+        "Erreur création paiement NOWPayments:",
+        result
       );
-      loadStats();
+
+      throw new Error(
+        result.error ||
+        "Impossible de créer le paiement NOWPayments."
+      );
+    }
+
+    // Redirection vers la facture unique
+    window.location.href = result.invoice_url;
+    return;
+  }
+
+  // ============================
+  // AUTRES MOYENS DE PAIEMENT
+  // ============================
+  contributionForm.reset();
+
+  setMessage(
+    contributionMessage,
+    "Merci ! Votre contribution a été enregistrée et sera vérifiée par l'équipe."
+  );
+
+  loadStats();
+}
     } catch (error) {
       console.error("Erreur contribution :", error);
       const code = clean(error?.code);
