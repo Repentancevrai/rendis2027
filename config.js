@@ -16,3 +16,13 @@ window.addEventListener("load", function () {
   s.defer = true;
   document.head.appendChild(s);
 }, { once: true });
+window.addEventListener("load", function () {
+  if (document.querySelector('script[data-benie-hommage="1"]')) return;
+
+  var s = document.createElement("script");
+  s.src = "hommage-benie-richmond.js";
+  s.dataset.benieHommage = "1";
+  s.defer = true;
+
+  document.head.appendChild(s);
+}, { once: true });
