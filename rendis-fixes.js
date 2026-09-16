@@ -8,11 +8,14 @@
     const form = document.getElementById("orderForm");
     if (!form) return 0;
     const prices = {
-      basiqueQty: 10000,
-      economiqueQty: 15000,
-      premiumQty: 25000,
-      pagnePieceQty: 6000
-    };
+  basiqueQty: 10000,
+  economiqueQty: 15000,
+  premiumQty: 25000,
+  pagnePieceQty: 6000,
+  tshirtQty: 3000,
+  poloQty: 5000,
+  sacQty: 4000
+};
     const data = new FormData(form);
     return Object.entries(prices).reduce((sum, [name, price]) =>
       sum + Math.max(0, Number(data.get(name)) || 0) * price, 0);
