@@ -26,3 +26,13 @@ window.addEventListener("load", function () {
 
   document.head.appendChild(s);
 }, { once: true });
+window.addEventListener("load", function () {
+  if (document.querySelector('script[data-rendis-gadgets="1"]')) return;
+
+  var s = document.createElement("script");
+  s.src = "rendis-gadgets.js";
+  s.dataset.rendisGadgets = "1";
+  s.defer = true;
+
+  document.head.appendChild(s);
+}, { once: true });
