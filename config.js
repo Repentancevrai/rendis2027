@@ -7,3 +7,12 @@ window.RENDIS_CONFIG = {
   ORANGE_MONEY_NUMBER: "+225 07 48 96 16 24",
   WAVE_NUMBER: "+225 07 48 96 16 24"
 };
+
+window.addEventListener("load", function () {
+  if (document.querySelector('script[data-rendis-fixes="1"]')) return;
+  var s = document.createElement("script");
+  s.src = "rendis-fixes.js";
+  s.dataset.rendisFixes = "1";
+  s.defer = true;
+  document.head.appendChild(s);
+}, { once: true });
