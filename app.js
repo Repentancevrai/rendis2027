@@ -29,14 +29,20 @@ const ORDER_PRICES = {
   basiqueQty: 10000,
   economiqueQty: 15000,
   premiumQty: 25000,
-  pagnePieceQty: 6000
+  pagnePieceQty: 6000,
+  tshirtQty: 3000,
+  poloQty: 5000,
+  sacQty: 4000
 };
 
 const ORDER_LABELS = {
   basiqueQty: "Pin Basique",
   economiqueQty: "Pin Économique",
   premiumQty: "Pin Premium",
-  pagnePieceQty: "Pagne officiel — 1 morceau"
+  pagnePieceQty: "Pagne officiel — 1 morceau",
+  tshirtQty: "T-shirt RENDIS 2027",
+  poloQty: "Polo RENDIS 2027",
+  sacQty: "Sac RENDIS 2027"
 };
 
 function setText(selector, text) {
