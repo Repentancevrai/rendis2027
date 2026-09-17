@@ -83,7 +83,8 @@ function paymentInstruction(method, total) {
     return `Envoyez ${money(total)} par Wave au ${WAVE}, puis conservez la référence du transfert.`;
   }
   if (method === "DJAMO_BUSINESS") {
-    return `Utilisez le lien Djamo Business officiel pour payer ${money(total)}.`;
+  return `Après votre paiement Djamo Business de ${money(total)}, envoyez votre capture d'écran sur WhatsApp avec votre nom complet, l'article commandé, la couleur, la taille et votre numéro de téléphone.`;
+}.`;
   }
   return "";
 }
