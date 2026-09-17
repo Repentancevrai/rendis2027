@@ -82,9 +82,9 @@ function paymentInstruction(method, total) {
   if (method === "WAVE") {
     return `Envoyez ${money(total)} par Wave au ${WAVE}, puis conservez la référence du transfert.`;
   }
-  if (method === "DJAMO_BUSINESS") {
-  return `Après votre paiement Djamo Business de ${money(total)}, envoyez votre capture d'écran sur WhatsApp avec votre nom complet, l'article commandé, la couleur, la taille et votre numéro de téléphone.`;
-}  
+if (method === "DJAMO_BUSINESS") {
+  return `Sur la page Djamo, saisissez le montant affiché par RENDIS (${money(total)}), puis ajoutez les frais affichés par Djamo. Après le paiement, envoyez votre capture d'écran sur WhatsApp avec votre nom complet, l'article commandé, la couleur, la taille et votre numéro de téléphone.`;
+}
   return "";
 }
 
