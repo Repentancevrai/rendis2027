@@ -181,11 +181,17 @@ function prepareOrderForm() {
     `;
   }
 
-  orderForm.querySelectorAll('input[name="basiqueQty"], input[name="economiqueQty"], input[name="premiumQty"], input[name="pagnePieceQty"]')
-    .forEach((input) => {
-      input.addEventListener("input", () => updateOrderTotal(orderForm));
-      input.addEventListener("change", () => updateOrderTotal(orderForm));
-    });
+  orderForm.addEventListener("input", (event) => {
+  if (event.target?.matches('input[name$="Qty"]')) {
+    updateOrderTotal(orderForm);
+  }
+});
+
+orderForm.addEventListener("change", (event) => {
+  if (event.target?.matches('input[name$="Qty"]')) {
+    updateOrderTotal(orderForm);
+  }
+});
 
   orderForm.addEventListener("change", (event) => {
     if (event.target?.name === "paymentMethod") {
