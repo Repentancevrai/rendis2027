@@ -153,38 +153,66 @@
   }
 
   function createQuantityField(
-    name,
-    label,
-    price,
-    colors
-  ) {
-    const wrapper = document.createElement("label");
+  name,
+  label,
+  price,
+  colors
+) {
+  const wrapper = document.createElement("label");
 
-    wrapper.className =
-      "rendis-gadget-quantity";
+  wrapper.className = "rendis-gadget-quantity";
 
-    wrapper.innerHTML = `
-      <span>
-        <strong>${label}</strong>
-        — ${money(price)}
-      </span>
+  const colorOptions = String(colors || "")
+    .split(/\s*,\s*/)
+    .filter(Boolean)
+    .map(color => `<option value="${color}">${color}</option>`)
+    .join("");
 
-      <input
-        type="number"
-        name="${name}"
-        min="0"
-        step="1"
-        value="0"
-        inputmode="numeric"
-      >
+  const isSac = name === "sacQty";
 
-      <small>
-        ${colors}
-      </small>
-    `;
+  wrapper.innerHTML = `
+    <span>
+      <strong>${label}</strong>
+      — ${money(price)}
+    </span>
 
-    return wrapper;
-  }
+    ${
+      !isSac
+        ? `
+          <select name="${name}Color">
+            <option value="">Choisir la couleur</option>
+            ${colorOptions}
+          </select>
+
+          <select name="${name}Size">
+            <option value="">Choisir la taille</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+        `
+        : `
+          <select name="${name}Color">
+            <option value="">Choisir la couleur</option>
+            ${colorOptions}
+          </select>
+        `
+    }
+
+    <input
+      type="number"
+      name="${name}"
+      min="0"
+      step="1"
+      value="0"
+      inputmode="numeric"
+    >
+  `;
+
+  return wrapper;
+}
 
   function addGadgetOrderFields() {
     const form =
