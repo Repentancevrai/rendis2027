@@ -84,7 +84,7 @@ function paymentInstruction(method, total) {
   }
   if (method === "DJAMO_BUSINESS") {
   return `Après votre paiement Djamo Business de ${money(total)}, envoyez votre capture d'écran sur WhatsApp avec votre nom complet, l'article commandé, la couleur, la taille et votre numéro de téléphone.`;
-}.`;
+}
   }
   return "";
 }
