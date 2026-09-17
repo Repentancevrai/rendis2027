@@ -173,7 +173,7 @@ const contributions = data || [];
 
 // Contributions validées uniquement
 const contributionsValidees = contributions.filter(
-    contribution => contribution.statut === "VALIDE"
+    contribution => contribution.status === "VALIDE"
 );
 
 // Nombre de contributions validées
@@ -189,7 +189,7 @@ const montant = contributionsValidees.reduce(
 
 // Contributions à vérifier
 const enAttente = contributions.filter(
-    contribution => contribution.statut === "A_VERIFIER"
+    contribution => contribution.status === "A_VERIFIER"
 ).length;
 
 
