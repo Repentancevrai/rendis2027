@@ -65,7 +65,7 @@ function getOrderData(orderForm) {
       items.push(`${ORDER_LABELS[field]} x${quantity}`);
     }
   });
-
+  
   return { total, items };
 }
 
