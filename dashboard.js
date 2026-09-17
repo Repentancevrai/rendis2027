@@ -169,7 +169,7 @@ async function loadDashboardStats() {
 
 
 
-const contributions = données || [];
+const contributions = data || [];
 
 // Contributions validées uniquement
 const contributionsValidees = contributions.filter(
