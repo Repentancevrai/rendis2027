@@ -95,7 +95,7 @@
           ["127997.jpg","Communauté réunie devant le bâtiment"],
           ["127993.jpg","Communauté de Grand-Bassam"],
           ["127992.jpg","Moment de communion de la communauté"],
-          ["127988.jpg","Famille de la communauté de Grand-Bassam"]
+          
         ].map(([file, alt]) => `
           <figure style="margin:0;">
             <img src="images/${file}" alt="${alt}" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:16px;display:block;">
