@@ -8,11 +8,11 @@
     const form = document.getElementById("orderForm");
     if (!form) return 0;
     const prices = {
-  basiqueQty: 10000,
+  ,
   economiqueQty: 15000,
   premiumQty: 25000,
   pagnePieceQty: 6000,
-  tshirtQty: 3000,
+  tshirtQty: 4000,
   poloQty: 5000,
   sacQty: 4000
 };
@@ -28,7 +28,7 @@
     if (!old || old.dataset.rendisPinsFixed === "1") return;
 
     old.src = "images/pin-modele-2.png";
-    old.alt = "Les trois modèles officiels de pins RENDIS 2027 : Basique, Économique et Premium";
+    old.alt = "Les deux modèles officiels de pins RENDIS 2027 :Économique et Premium";
     old.loading = "lazy";
     old.style.cssText = "width:100%;height:auto;object-fit:contain;display:block;";
     old.dataset.rendisPinsFixed = "1";
