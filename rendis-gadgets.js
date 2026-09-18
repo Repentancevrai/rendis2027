@@ -33,10 +33,10 @@
       field: "sacQty",
       images: [
         "images/sac-rendis-2027-bleu.jpg",
-        "images/sac-rendis-2027-vert.jpg"
+        
       ],
-      alt: "Sacs officiels RENDIS 2027 bleu et vert",
-      colors: "Bleu et vert"
+      alt: "Sacs officiels RENDIS 2027 bleu ",
+      colors: "Bleu "
     }
   };
 
