@@ -8,9 +8,8 @@
     const form = document.getElementById("orderForm");
     if (!form) return 0;
     const prices = {
-  ,
-  economiqueQty: 15000,
-  premiumQty: 25000,
+  economiqueQty: 10000,
+  premiumQty: 20000,
   pagnePieceQty: 6000,
   tshirtQty: 4000,
   poloQty: 5000,
