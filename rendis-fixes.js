@@ -8,7 +8,8 @@
     const form = document.getElementById("orderForm");
     if (!form) return 0;
     const prices = {
-  
+
+      
 economiqueQty: 10000,
 premiumQty: 20000,
 pagnePieceQty: 6000,
