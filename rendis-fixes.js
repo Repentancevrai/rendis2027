@@ -27,7 +27,7 @@ pagnePieceQty: 6000,
     const old = card.querySelector("img");
     if (!old || old.dataset.rendisPinsFixed === "1") return;
 
-    old.src = "old.src = "images/WA_1789714650198.jpeg";
+old.src = "images/WA_1789714650198.jpeg";
     old.alt = "Les deux modèles officiels de pins RENDIS 2027 :Économique et Premium";
     old.loading = "lazy";
     old.style.cssText = "width:100%;height:auto;object-fit:contain;display:block;";
