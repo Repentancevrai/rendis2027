@@ -25,11 +25,11 @@ function clean(value) {
   return String(value || "").trim();
 }
 
-const ORDER_PRICES = {basiqueQty: 10000,
+const ORDER_PRICES = {
   economiqueQty: 10000,
   premiumQty: 20000,
   pagnePieceQty: 6000,
-  tshirtQty: 4000,
+  tshirtQty: 3000,
   tshirtEnfantQty: 2000,
   poloQty: 5000,
   sacQty: 4000
