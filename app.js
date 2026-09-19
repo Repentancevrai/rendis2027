@@ -105,7 +105,7 @@ function prepareProductImages() {
     const pinImage = cards[0].querySelector("img");
     if (pinImage) {
       pinImage.src = "images/pins-rendis-2027-nouveau.png";
-      pinImage.alt = "Les trois modèles officiels de pins RENDIS 2027 : Basique, Économique et Premium";
+      pinImage.alt = "Les deux modèles officiels de pins RENDIS 2027 : Économique et Premium";
     }
   }
 
