@@ -19,7 +19,8 @@ function money(n) {
 
 function clean(value) {
   return String(value || "").trim();
-}
+}const ORANGE_MONEY = clean(cfg.ORANGE_MONEY_NUMBER);
+const WAVE = clean(cfg.WAVE_NUMBER);
 
 const ORDER_PRICES = {
   economiqueQty: 10000,
