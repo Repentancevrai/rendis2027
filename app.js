@@ -304,31 +304,50 @@ function replacePaymentSection() {
   if (!section) return;
 
   section.innerHTML = `
-    <div class="container">
-      <div class="section-heading">
-        <p class="eyebrow">PAIEMENTS DES COMMANDES</p>
-        <h2>Payez votre commande simplement</h2>
-        <p>Après avoir enregistré votre commande, utilisez l'un des trois moyens de paiement ci-dessous.</p>
-      </div>
-      <div class="payment-grid">
-        <article class="payment-card">
-          <div class="payment-card-head"><span class="payment-badge">CÔTE D’IVOIRE</span><h3>Orange Money</h3></div>
-          <p>Envoyez le montant exact de votre commande au numéro officiel :</p>
-          <ul class="clean-list"><li><strong>${ORANGE_MONEY}</strong></li><li>Conservez la référence du transfert</li><li>L'équipe vérifie ensuite la commande</li></ul>
-        </article>
-        <article class="payment-card">
-          <div class="payment-card-head"><span class="payment-badge">CÔTE D’IVOIRE</span><h3>Wave</h3></div>
-          <p>Envoyez le montant exact de votre commande au numéro officiel :</p>
-          <ul class="clean-list"><li><strong>${WAVE}</strong></li><li>Conservez la référence du transfert</li><li>L'équipe vérifie ensuite la commande</li></ul>
-        </article>
-        <article class="payment-card">
-          <div class="payment-card-head"><span class="payment-badge">PROFESSIONNEL</span><h3>Djamo Business</h3></div>
-          <p>Paiement via le lien professionnel officiel de RENDIS 2027.</p><a class="btn btn-ghost" href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20Djamo%20Business%20%28%20WAVE%20%2C%20ORANGE%20%2C%20MOOV%20MONEY%20%2C%20MTN%20Money." target="_blank" rel="noopener noreferrer">Contacter RENDIS sur WhatsApp</a>
-          <button class="btn btn-ghost" id="djamoPaymentButton" type="button">Ouvrir Djamo Business</button>
-        </article>
-      </div>
+  section.innerHTML = `
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">PAIEMENTS DES COMMANDES</p>
+      <h2>Payez votre commande simplement</h2>
     </div>
-  `;
+
+    <div class="payment-grid">
+      <article class="payment-card">
+        <div class="payment-card-head">
+          <span class="payment-badge">PROFESSIONNEL</span>
+          <h3>Djamo Business</h3>
+        </div>
+
+        <p>Paiement via le lien professionnel officiel de RENDIS 2027.</p>
+
+        <a
+          class="btn btn-ghost"
+          href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20Djamo%20Business%20%28%20WAVE%20%2C%20ORANGE%20%2C%20MOOV%20MONEY%20%2C%20MTN%20Money."
+          target="_blank"
+          rel="noopener noreferrer"
+        >Contacter RENDIS sur WhatsApp</a>
+
+        <button class="btn btn-ghost" id="djamoPaymentButton" type="button">
+          Ouvrir Djamo Business
+        </button>
+
+        <div style="margin-top:12px;">
+          <a
+            href="https://wa.me/22541089295"
+            target="_blank"
+            rel="noopener noreferrer"
+          >WhatsApp RENDIS — lien 1</a>
+          <br>
+          <a
+            href="https://wa.me/2250748961624"
+            target="_blank"
+            rel="noopener noreferrer"
+          >WhatsApp RENDIS — lien 2</a>
+        </div>
+      </article>
+    </div>
+  </div>
+`;
 
   const button = document.getElementById("djamoPaymentButton");
   if (button) {
