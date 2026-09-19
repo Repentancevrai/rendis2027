@@ -1,9 +1,5 @@
 const cfg = window.RENDIS_CONFIG || {};
 let supabaseClient = null;
-
-const ORANGE_MONEY = cfg.ORANGE_MONEY_NUMBER || "+225 07 48 96 16 24";
-const WAVE = cfg.WAVE_NUMBER || "+225 07 48 96 16 24";
-
 if (
   window.supabase &&
   cfg.SUPABASE_URL &&
