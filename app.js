@@ -323,7 +323,7 @@ function replacePaymentSection() {
         </article>
         <article class="payment-card">
           <div class="payment-card-head"><span class="payment-badge">PROFESSIONNEL</span><h3>Djamo Business</h3></div>
-          <p>Paiement via le lien professionnel officiel de RENDIS 2027.</p>
+          <p>Paiement via le lien professionnel officiel de RENDIS 2027.</p><a class="btn btn-ghost" href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20Djamo%20Business%20%28%20WAVE%20%2C%20ORANGE%20%2C%20MOOV%20MONEY%20%2C%20MTN%20Money." target="_blank" rel="noopener noreferrer">Contacter RENDIS sur WhatsApp</a>
           <button class="btn btn-ghost" id="djamoPaymentButton" type="button">Ouvrir Djamo Business</button>
         </article>
       </div>
