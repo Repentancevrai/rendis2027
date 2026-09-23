@@ -16,10 +16,15 @@
       image: "images/tshirt-rendis-2027.jpg",
       alt: "T-shirt officiel RENDIS 2027",
       colors: "Blanc, bleu, Bordeaux, orange et vert"
+    tshirtEnfant: {
+      name: "T-shirt RENDIS 2027 — Enfant",
+      price: 2000,
+      field: "tshirtEnfantQty",
+      image: "images/tshirt-rendis-2027-enfant.jpg",
+      alt: "T-shirt officiel RENDIS 2027 pour enfant",
+      colors: "Orange"
     },
-
-    polo: {
-      name: "Polo RENDIS 2027",
+    polo: {  name: "Polo RENDIS 2027",
       price: 5000,
       field: "poloQty",
       image: "images/polo-rendis-2027.jpg",
