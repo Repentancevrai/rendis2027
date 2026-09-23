@@ -162,7 +162,7 @@ old.src = "images/WA_1789714650198.jpeg";
     fixDjamo();
     addFamilyGallery();
     addFacebookVideos();
-    addLocalVideo();
+    
   }
 
   if (document.readyState === "loading") {
