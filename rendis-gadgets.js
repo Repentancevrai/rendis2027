@@ -1,4 +1,4 @@
-(function () {
+dr(function () {
   "use strict";
 
   /*
@@ -50,6 +50,7 @@
    * sans modifier les produits déjà validés.
    */
   window.RENDIS_GADGETS = GADGETS;
+window.RENDIS_GADGETS_APPLY = apply;
 
   function money(value) {
     return (
