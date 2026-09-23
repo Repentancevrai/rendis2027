@@ -477,3 +477,8 @@ function boot() {
 }
 
 boot();
+window.addEventListener("load", () => {
+  if (typeof window.RENDIS_GADGETS_APPLY === "function") {
+    window.RENDIS_GADGETS_APPLY();
+  }
+}, { once: true });
