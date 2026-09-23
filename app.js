@@ -304,7 +304,6 @@ function replacePaymentSection() {
   if (!section) return;
 
   section.innerHTML = `
-  section.innerHTML = `
   <div class="container">
     <div class="section-heading">
       <p class="eyebrow">PAIEMENTS DES COMMANDES</p>
