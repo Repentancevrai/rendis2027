@@ -3,7 +3,7 @@
 
   /*
    * RENDIS 2027 — NOUVEAUX GADGETS
-   * T-shirt : 3 000 FCFA
+   * T-shirt : 4 000 FCFA
    * Polo    : 5 000 FCFA
    * Sac     : 4 000 FCFA
    */
@@ -11,7 +11,7 @@
   const GADGETS = {
     tshirt: {
       name: "T-shirt RENDIS 2027",
-      price: 3000,
+      price: 4000,
       field: "tshirtQty",
       image: "images/tshirt-rendis-2027.jpg",
       alt: "T-shirt officiel RENDIS 2027",
