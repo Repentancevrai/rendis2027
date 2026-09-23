@@ -19,7 +19,7 @@
       <div style="background:#fff;border:1px solid rgba(18,33,58,.10);border-radius:22px;overflow:hidden;box-shadow:0 12px 35px rgba(18,33,58,.08);">
 
         <img
-          src="images/benie-richmond-alex.jpg"
+          src="images/benie-richmond-alex-nouvelle.jpg"
           alt="Bénié Richmond Alex et son épouse"
           loading="lazy"
           style="width:100%;max-height:520px;object-fit:cover;display:block;"
