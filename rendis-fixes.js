@@ -139,30 +139,50 @@ old.src = "images/WA_1789714650198.jpeg";
     media.appendChild(section);
   }
 
-  function addLocalVideo() {
-    const media = document.getElementById("media");
-    if (!media || document.getElementById("rendisLocalVideo")) return;
-    const section = document.createElement("section");
-    section.id = "rendisLocalVideo";
-    section.className = "container";
-    section.style.cssText = "margin-top:20px;padding-bottom:30px;";
-    section.innerHTML = `
-      <div class="section-heading">
-        <p class="eyebrow">VIDÉO RENDIS 2027</p>
-        <h2>Ensemble, on avance</h2>
-      </div>
-      <video controls preload="metadata" style="width:100%;max-width:900px;border-radius:16px;display:block;">
-        <source src="RENDIS_2027_Ensemble_On_Avance.mp4" type="video/mp4">
-      </video>`;
-    media.appendChild(section);
-  }
+  
 
-  function apply() {
+function addLocalVideo() {
+  const media = document.getElementById("media");
+  if (!media || document.getElementById("rendisLocalVideos")) return;
+
+  const section = document.createElement("section");
+  section.id = "rendisLocalVideos";
+  section.className = "container";
+  section.style.cssText = "margin-top:20px;padding-bottom:40px;";
+
+  section.innerHTML = `
+    <div class="section-heading">
+      <p class="eyebrow">TÉMOIGNAGES RENDIS 2027</p>
+      <h2>Les témoignages de notre communauté</h2>
+      <p>Des témoignages de frères de la communauté vivant à l'étranger.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+
+      <article style="background:#fff;border-radius:18px;padding:14px;box-shadow:0 8px 25px rgba(0,0,0,.08);">
+        <h3>Frère Blaise Pascal — 🇨🇦 Canada</h3>
+        <video controls preload="metadata" style="width:100%;border-radius:14px;display:block;">
+          <source src="images/frere-blaise-pascal.mp4" type="video/mp4">
+        </video>
+      </article>
+
+      <article style="background:#fff;border-radius:18px;padding:14px;box-shadow:0 8px 25px rgba(0,0,0,.08);">
+        <h3>Papa GNOTO — 🇺🇸 États-Unis</h3>
+        <video controls preload="metadata" style="width:100%;border-radius:14px;display:block;">
+          <source src="images/papa-gnoto-usa.mp4" type="video/mp4">
+        </video>
+      </article>
+
+    </div>
+  `;
+
+  media.appendChild(section);
+}  function apply() {
     fixPinPhoto();
     fixDjamo();
     addFamilyGallery();
     addFacebookVideos();
-    
+    addLocalVideo();
   }
 
   if (document.readyState === "loading") {
