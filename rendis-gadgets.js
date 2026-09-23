@@ -9,7 +9,7 @@
    */
 
   const GADGETS = {
-  tshirtEnfant: {
+  tshirt: {
       name: "T-shirt RENDIS 2027",
       price: 4000,
       field: "tshirtQty",
