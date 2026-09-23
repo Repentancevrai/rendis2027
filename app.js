@@ -108,25 +108,37 @@ function prepareProductImages() {
 
   if (cards.length >= 2) {
     const pagneCard = cards[1];
-    const oldImages = pagneCard.querySelectorAll("img");
-    if (oldImages.length) {
-      oldImages.forEach((img, index) => {
-        if (index === 0) {
-          img.src = "images/pagne-rendis-officiel.jpg";
-          img.alt = "Pagne officiel RENDIS 2027 avec le logo de l'Église en bas";
-        } else {
-          img.remove();
-        }
-      });
-    } else {
-      const body = pagneCard.querySelector(".product-body") || pagneCard;
-      const img = document.createElement("img");
-      img.src = "images/pagne-rendis-officiel.jpg";
-      img.alt = "Pagne officiel RENDIS 2027 avec le logo de l'Église en bas";
-      img.loading = "lazy";
-      pagneCard.insertBefore(img, body);
-    }
+    
+const oldImages = pagneCard.querySelectorAll("img");if (oldImages.length) {
+  oldImages[0].src = "images/pagne-rendis-officiel.jpg";
+  oldImages[0].alt = "Pagne officiel RENDIS 2027 — modèle 1";
 
+  if (oldImages[1]) {
+    oldImages[1].src = "images/pagne-rendis-officiel-2.jpg";
+    oldImages[1].alt = "Pagne officiel RENDIS 2027 — modèle 2";
+  } else {
+    const secondImg = document.createElement("img");
+    secondImg.src = "images/pagne-rendis-officiel-2.jpg";
+    secondImg.alt = "Pagne officiel RENDIS 2027 — modèle 2";
+    secondImg.loading = "lazy";
+    oldImages[0].insertAdjacentElement("afterend", secondImg);
+  }
+} else {
+  const body = pagneCard.querySelector(".product-body") || pagneCard;
+
+  const img1 = document.createElement("img");
+  img1.src = "images/pagne-rendis-officiel.jpg";
+  img1.alt = "Pagne officiel RENDIS 2027 — modèle 1";
+  img1.loading = "lazy";
+
+  const img2 = document.createElement("img");
+  img2.src = "images/pagne-rendis-officiel-2.jpg";
+  img2.alt = "Pagne officiel RENDIS 2027 — modèle 2";
+  img2.loading = "lazy";
+
+  pagneCard.insertBefore(img1, body);
+  pagneCard.insertBefore(img2, body);
+}
     pagneCard.querySelectorAll("strong").forEach((el) => {
       if (/7\s*000|21\s*000/.test(el.textContent)) el.textContent = "6 000 FCFA";
     });
