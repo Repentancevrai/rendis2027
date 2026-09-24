@@ -9,7 +9,7 @@
     if (!form) return 0;
     const prices = {
 
-      
+
 economiqueQty: 10000,
 premiumQty: 20000,
 pagnePieceQty: 6000,
@@ -139,8 +139,6 @@ old.src = "images/WA_1789714650198.jpeg";
     media.appendChild(section);
   }
 
-  
-
 function addLocalVideo() {
   const media = document.getElementById("media");
   if (!media || document.getElementById("rendisLocalVideos")) return;
@@ -191,4 +189,357 @@ function addLocalVideo() {
     apply();
   }
   window.addEventListener("load", apply, { once: true });
+})();/* =========================================================
+   RENDIS 2027 — MISSION 3 + MISSION 4
+   Bloc commentaires + bannière informations imminentes
+   ========================================================= */
+(function () {
+
+  /* =========================
+     MISSION 3 — COMMENTAIRES
+     ========================= */
+  function addRendisComments() {
+    const anchor = document.getElementById("precommandes");
+    if (!anchor || document.getElementById("rendisComments")) return;
+
+    const section = document.createElement("section");
+    section.id = "rendisComments";
+    section.className = "section section-soft";
+
+    section.innerHTML = `
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">💬 ESPACE COMMUNAUTÉ</p>
+          <h2>Vos commentaires</h2>
+          <p>Partagez votre message, votre encouragement ou votre avis sur RENDIS 2027.</p>
+        </div>
+
+        <div style="max-width:760px;margin:0 auto;">
+
+          <form id="rendisCommentForm"
+                style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:18px;padding:20px;box-shadow:0 8px 25px rgba(0,0,0,.07);">
+
+            <label style="display:block;margin-bottom:14px;font-weight:600;">
+              Votre nom
+              <input
+                id="rendisCommentName"
+                type="text"
+                maxlength="80"
+                required
+                placeholder="Ex. Jean Kouassi"
+                style="display:block;width:100%;box-sizing:border-box;margin-top:7px;padding:12px;border:1px solid #d9dfdc;border-radius:10px;font:inherit;"
+              >
+            </label>
+
+            <label style="display:block;margin-bottom:14px;font-weight:600;">
+              Votre commentaire
+              <textarea
+                id="rendisCommentText"
+                maxlength="500"
+                rows="4"
+                required
+                placeholder="Écrivez votre commentaire..."
+                style="display:block;width:100%;box-sizing:border-box;margin-top:7px;padding:12px;border:1px solid #d9dfdc;border-radius:10px;font:inherit;resize:vertical;"
+              ></textarea>
+            </label>
+
+            <button class="btn" type="submit">
+              Publier mon commentaire
+            </button>
+
+            <p
+              id="rendisCommentStatus"
+              class="form-message"
+              role="status"
+              style="margin-bottom:0;"
+            ></p>
+          </form>
+
+          <div
+            id="rendisCommentList"
+            style="display:grid;gap:12px;margin-top:20px;"
+          ></div>
+
+        </div>
+      </div>
+    `;
+
+    anchor.insertAdjacentElement("afterend", section);
+
+    const storageKey = "rendis2027_comments_v1";
+    const form = document.getElementById("rendisCommentForm");
+    const list = document.getElementById("rendisCommentList");
+    const status = document.getElementById("rendisCommentStatus");
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        }[char];
+      });
+    }
+
+    function getComments() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveComments(comments) {
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(comments.slice(0, 30))
+      );
+    }
+
+    function renderComments() {
+      const comments = getComments();
+
+      if (!comments.length) {
+        list.innerHTML = `
+          <div style="background:#fff;border:1px dashed rgba(0,0,0,.15);border-radius:14px;padding:18px;text-align:center;opacity:.72;">
+            Soyez le premier à laisser un commentaire.
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = comments.map(function (item) {
+        return `
+          <article
+            style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:15px 17px;box-shadow:0 5px 18px rgba(0,0,0,.05);"
+          >
+            <strong style="font-size:1rem;">
+              ${escapeHtml(item.name)}
+            </strong>
+
+            <p style="margin:8px 0 0;white-space:pre-wrap;line-height:1.55;">
+              ${escapeHtml(item.text)}
+            </p>
+
+            <small style="display:block;margin-top:9px;opacity:.55;">
+              ${new Date(item.date).toLocaleDateString("fr-FR")}
+            </small>
+          </article>
+        `;
+      }).join("");
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document
+        .getElementById("rendisCommentName")
+        .value
+        .trim();
+
+      const text = document
+        .getElementById("rendisCommentText")
+        .value
+        .trim();
+
+      if (!name || !text) return;
+
+      const comments = getComments();
+
+      comments.unshift({
+        name: name,
+        text: text,
+        date: new Date().toISOString()
+      });
+
+      saveComments(comments);
+
+      form.reset();
+
+      status.textContent =
+        "Votre commentaire a été ajouté. ✓";
+
+      renderComments();
+    });
+
+    renderComments();
+  }
+
+
+  /* ==================================
+     MISSION 4 — BANNIÈRE INFORMATIONS
+     ================================== */
+  function addRendisUrgentBanner() {
+    if (document.getElementById("rendisUrgentBanner")) return;
+
+    const main = document.querySelector("main");
+    if (!main) return;
+
+    const banner = document.createElement("section");
+    banner.id = "rendisUrgentBanner";
+    banner.setAttribute(
+      "aria-label",
+      "Informations imminentes RENDIS 2027"
+    );
+
+    banner.innerHTML = `
+      <div style="max-width:1180px;margin:0 auto;padding:0 16px;">
+        <div class="rendis-urgent-box">
+
+          <div class="rendis-urgent-icon" aria-hidden="true">
+            📢
+          </div>
+
+          <div style="flex:1;">
+            <strong class="rendis-urgent-title">
+              INFORMATIONS IMMINENTES
+            </strong>
+
+            <div class="rendis-urgent-events">
+
+              <div class="rendis-urgent-event">
+                <span class="rendis-urgent-pulse"></span>
+                <span>
+                  <b>04 OCTOBRE 2026</b> —
+                  CULTE D'ENSEMBLE DU GRAND SUD
+                </span>
+              </div>
+
+              <div class="rendis-urgent-event">
+                <span class="rendis-urgent-pulse"></span>
+                <span>
+                  <b>06 DÉCEMBRE 2026</b> —
+                  CULTE D'OFFRANDES DE RECONNAISSANCE
+                  • OBJECTIF :
+                  <b>3 000 000 FCFA</b>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+    main.insertBefore(banner, main.firstElementChild);
+
+    const style = document.createElement("style");
+
+    style.textContent = `
+      #rendisUrgentBanner {
+        margin: 10px 0 18px;
+      }
+
+      .rendis-urgent-box {
+        display:flex;
+        align-items:center;
+        gap:13px;
+        padding:14px 16px;
+        border-radius:16px;
+        background:#fff7df;
+        border:2px solid #d99a00;
+        box-shadow:0 8px 24px rgba(0,0,0,.08);
+        color:#3c2b00;
+      }
+
+      .rendis-urgent-icon {
+        font-size:25px;
+        flex:none;
+      }
+
+      .rendis-urgent-title {
+        display:block;
+        font-size:.78rem;
+        letter-spacing:.08em;
+        margin-bottom:6px;
+      }
+
+      .rendis-urgent-events {
+        display:grid;
+        gap:7px;
+        font-size:.9rem;
+        line-height:1.45;
+      }
+
+      .rendis-urgent-event {
+        display:flex;
+        align-items:flex-start;
+        gap:8px;
+      }
+
+      .rendis-urgent-pulse {
+        width:9px;
+        height:9px;
+        min-width:9px;
+        margin-top:6px;
+        border-radius:50%;
+        background:#d21f3c;
+        animation:rendisUrgentPulse 1.1s ease-in-out infinite;
+      }
+
+      @keyframes rendisUrgentPulse {
+        0%,100% {
+          opacity:1;
+          transform:scale(1);
+        }
+
+        50% {
+          opacity:.3;
+          transform:scale(.7);
+        }
+      }
+
+      @media(max-width:700px) {
+        .rendis-urgent-box {
+          align-items:flex-start;
+          padding:12px;
+        }
+
+        .rendis-urgent-events {
+          font-size:.82rem;
+        }
+
+        .rendis-urgent-icon {
+          font-size:21px;
+        }
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        .rendis-urgent-pulse {
+          animation:none;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+
+  /* ==========================
+     LANCEMENT DES DEUX BLOCS
+     ========================== */
+  function applyRendisMission3And4() {
+    addRendisComments();
+    addRendisUrgentBanner();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      applyRendisMission3And4,
+      { once:true }
+    );
+  } else {
+    applyRendisMission3And4();
+  }
+
+  window.addEventListener(
+    "load",
+    applyRendisMission3And4,
+    { once:true }
+  );
+
 })();
