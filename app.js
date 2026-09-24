@@ -173,20 +173,15 @@ function prepareOrderForm() {
   let fieldset = orderForm.querySelector(".payment-methods");
   if (fieldset) {
     fieldset.innerHTML = `
-      <legend>Choisissez votre moyen de paiement</legend>
-      <label class="radio-card">
-        <input type="radio" name="paymentMethod" value="ORANGE_MONEY" required>
-        <span><b>Orange Money</b><small>${ORANGE_MONEY}</small></span>
-      </label>
-      <label class="radio-card">
-        <input type="radio" name="paymentMethod" value="WAVE">
-        <span><b>Wave</b><small>${WAVE}</small></span>
-      </label>
-      <label class="radio-card">
-        <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS">
-        <span><b>Djamo Business</b><small>Paiement via le lien professionnel officiel RENDIS.</small></span>
-      </label>
-    `;
+  <legend>Choisissez votre moyen de paiement</legend>
+  <label class="radio-card">
+    <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS" required>
+    <span>
+      <b>Djamo Business</b>
+      <small>Paiement via le lien professionnel officiel RENDIS 2027.</small>
+    </span>
+  </label>
+`;
   }
 
   orderForm.addEventListener("input", (event) => {
