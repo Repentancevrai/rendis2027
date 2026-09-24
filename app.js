@@ -114,11 +114,11 @@ const oldImages = pagneCard.querySelectorAll("img");if (oldImages.length) {
   oldImages[0].alt = "Pagne officiel RENDIS 2027 — modèle 1";
 
   if (oldImages[1]) {
-    oldImages[1].src = "images/pagne-rendis-officiel-2.jpg";
+    oldImages[1].src = "images/IMG_20260924_093030_499.png";
     oldImages[1].alt = "Pagne officiel RENDIS 2027 — modèle 2";
   } else {
     const secondImg = document.createElement("img");
-    secondImg.src = "images/pagne-rendis-officiel-2.jpg";
+secondImg.src = "images/IMG_20260924_093030_499.png";
     secondImg.alt = "Pagne officiel RENDIS 2027 — modèle 2";
     secondImg.loading = "lazy";
     oldImages[0].insertAdjacentElement("afterend", secondImg);
@@ -132,7 +132,7 @@ const oldImages = pagneCard.querySelectorAll("img");if (oldImages.length) {
   img1.loading = "lazy";
 
   const img2 = document.createElement("img");
-  img2.src = "images/pagne-rendis-officiel-2.jpg";
+  img2.src = "images/IMG_20260924_093030_499.png";
   img2.alt = "Pagne officiel RENDIS 2027 — modèle 2";
   img2.loading = "lazy";
 
