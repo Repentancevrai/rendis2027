@@ -260,7 +260,14 @@ window.RENDIS_GADGETS_APPLY = apply;
         GADGETS.tshirt.colors
       )
     );
-
+fieldset.appendChild(
+  createQuantityField(
+    GADGETS.tshirtEnfant.field,
+    GADGETS.tshirtEnfant.name,
+    GADGETS.tshirtEnfant.price,
+    GADGETS.tshirtEnfant.colors
+  )
+);
     fieldset.appendChild(
       createQuantityField(
         GADGETS.polo.field,
