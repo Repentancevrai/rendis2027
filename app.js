@@ -328,60 +328,10 @@ orderForm.addEventListener("change", (event) => {
   return orderForm;
 }
 
-function replacePaymentSection() {
+}function replacePaymentSection() {
   const section = document.getElementById("paiements");
-  if (!section) return;
-
-  section.innerHTML = `
-  <div class="container">
-    <div class="section-heading">
-      <p class="eyebrow">PAIEMENTS DES COMMANDES</p>
-      <h2>Payez votre commande simplement</h2>
-    </div>
-
-    <div class="payment-grid">
-      <article class="payment-card">
-        <div class="payment-card-head">
-          <span class="payment-badge">PROFESSIONNEL</span>
-          <h3>Djamo Business</h3>
-        </div>
-
-        <p>Paiement via le lien professionnel officiel de RENDIS 2027.</p>
-
-        <a
-          class="btn btn-ghost"
-        href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-          target="_blank"
-          rel="noopener noreferrer"
-        >Contacter RENDIS sur WhatsApp</a>
-
-        <button class="btn btn-ghost" id="djamoPaymentButton" type="button">
-          Ouvrir Djamo Business
-        </button>
-
-        <div style="margin-top:12px;">
-          <a
-            href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-            target="_blank"
-            rel="noopener noreferrer"
-          >WhatsApp RENDIS — lien 1</a>
-          <br>
-          <a
-            href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-            target="_blank"
-            rel="noopener noreferrer"
-          >WhatsApp RENDIS — lien 2</a>
-        </div>
-      </article>
-    </div>
-  </div>
-`;
-
-  const button = document.getElementById("djamoPaymentButton");
-  if (button) {
-    button.addEventListener("click", () => {
-      if (!redirectDjamo()) alert("Le lien Djamo Business n'est pas configuré.");
-    });
+  if (section) {
+    section.innerHTML = "";
   }
 }
 
