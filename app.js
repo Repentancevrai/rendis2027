@@ -328,7 +328,7 @@ function replacePaymentSection() {
 
         <a
           class="btn btn-ghost"
-          href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20Djamo%20Business%20%28%20WAVE%20%2C%20ORANGE%20%2C%20MOOV%20MONEY%20%2C%20MTN%20Money."
+        href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
           target="_blank"
           rel="noopener noreferrer"
         >Contacter RENDIS sur WhatsApp</a>
@@ -339,13 +339,13 @@ function replacePaymentSection() {
 
         <div style="margin-top:12px;">
           <a
-            href="https://wa.me/22541089295"
+            href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
             target="_blank"
             rel="noopener noreferrer"
           >WhatsApp RENDIS — lien 1</a>
           <br>
           <a
-            href="https://wa.me/2250748961624"
+            href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
             target="_blank"
             rel="noopener noreferrer"
           >WhatsApp RENDIS — lien 2</a>
