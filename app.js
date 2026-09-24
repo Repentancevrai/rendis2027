@@ -336,7 +336,7 @@ function replacePaymentSection() {
 }
 
 function removeCollectionAndDonationSections() {
-  ["contribuer", "mobilisation", "aides", "impact"].forEach((id) => {
+["contribuer", "mobilisation", "aides", "impact", "projet"].forEach((id) => {
     document.getElementById(id)?.remove();
   });
 
