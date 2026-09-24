@@ -169,20 +169,42 @@ function prepareOrderForm() {
     }
   }
 
-  // Moyens de paiement : uniquement Orange Money, Wave et Djamo Business.
-  let fieldset = orderForm.querySelector(".payment-methods");
-  if (fieldset) {
-    fieldset.innerHTML = `
-  <legend>Choisissez votre moyen de paiement</legend>
-  <label class="radio-card">
-    <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS" required>
-    <span>
-      <b>Djamo Business</b>
-      <small>Paiement via le lien professionnel officiel RENDIS 2027.</small>
-    </span>
-  </label>
-`;
-  }
+  // Moyen de paiement : un seul champ avec Djamo Business et les 2 liens WhatsApp.
+const fieldset = orderForm.querySelector(".payment-methods");
+if (fieldset) {
+  fieldset.innerHTML = `
+    <legend>Choisissez votre moyen de paiement</legend>
+
+    <label class="radio-card">
+      <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS" required>
+      <span>
+        <b>Djamo Business</b>
+        <small>Paiement via le lien professionnel officiel de RENDIS 2027.</small>
+      </span>
+    </label>
+
+    <div style="margin-top:12px;">
+      <p style="margin:0 0 8px;">
+        Pour TapTap Send, Western Union, MoneyGram, Wave ou Orange Money,
+        utilisez l’un des deux liens WhatsApp :
+      </p>
+
+      <a
+        class="btn btn-ghost"
+        href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
+        target="_blank"
+        rel="noopener noreferrer"
+      >WhatsApp RENDIS — lien 1</a>
+
+      <a
+        class="btn btn-ghost"
+        href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
+        target="_blank"
+        rel="noopener noreferrer"
+      >WhatsApp RENDIS — lien 2</a>
+    </div>
+  `;
+}
 
   orderForm.addEventListener("input", (event) => {
   if (event.target?.matches('input[name$="Qty"]')) {
