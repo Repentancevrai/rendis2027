@@ -237,7 +237,7 @@ orderForm.addEventListener("change", (event) => {
     }
 
     if (!paymentMethod) {
-      if (message) message.textContent = "Veuillez choisir Orange Money, Wave ou Djamo Business.";
+      if (message) message.textContent = "Veuillez choisir Djamo Business.";
       return;
     }
 
