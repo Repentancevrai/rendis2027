@@ -328,7 +328,7 @@ orderForm.addEventListener("change", (event) => {
   return orderForm;
 }
 
-}function replacePaymentSection() {
+function replacePaymentSection() {
   const section = document.getElementById("paiements");
   if (section) {
     section.innerHTML = "";
