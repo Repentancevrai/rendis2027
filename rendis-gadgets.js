@@ -4,7 +4,7 @@
   /*
    * RENDIS 2027 — NOUVEAUX GADGETS
    * T-shirt : 4 000 FCFA
-   * Polo    : 5 000 FCFA
+   * Polo    : 5 000 FCFAg
    * Sac     : 4 000 FCFA
    */
 
@@ -13,7 +13,12 @@
       name: "T-shirt RENDIS 2027",
       price: 4000,
       field: "tshirtQty",
-      image: "images/tshirt-rendis-2027.jpg",
+      images: [
+  "images/tshirt-rendis-2027.jpg",
+  "images/IMG-20260921-WA0091.jpg",
+  "images/IMG-20260921-WA0092.jpg",
+  "images/IMG-20260916-WA4325.jpg"
+],
       alt: "T-shirt officiel RENDIS 2027",
       colors: "Blanc, bleu, Bordeaux, orange et vert",
   },
