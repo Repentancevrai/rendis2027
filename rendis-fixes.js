@@ -14,6 +14,7 @@ economiqueQty: 10000,
 premiumQty: 20000,
 pagnePieceQty: 6000,
       tshirtQty: 4000,
+      tshirtEnfantQty: 2000,
   poloQty: 5000,
   sacQty: 4000
 };
