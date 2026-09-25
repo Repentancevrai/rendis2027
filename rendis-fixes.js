@@ -517,7 +517,6 @@ function addLocalVideo() {
     document.head.appendChild(style);
   }
 
-
   /* ==========================
      LANCEMENT DES DEUX BLOCS
      ========================== */
@@ -525,7 +524,6 @@ function addLocalVideo() {
     // addRendisComments();
     addRendisUrgentBanner();
   }
-
   if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
@@ -535,7 +533,6 @@ function addLocalVideo() {
   } else {
     applyRendisMission3And4();
   }
-
   window.addEventListener(
     "load",
     applyRendisMission3And4,
