@@ -522,7 +522,7 @@ function addLocalVideo() {
      LANCEMENT DES DEUX BLOCS
      ========================== */
   function applyRendisMission3And4() {
-    addRendisComments();
+    // addRendisComments();
     addRendisUrgentBanner();
   }
 
