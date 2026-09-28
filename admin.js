@@ -68,34 +68,30 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 if (data.user) {
-    // Vérification du rôle administrateur dans Supabase
-  const { data: profile, error: profileError } = await supabaseClient
-    .from("profiles")
-    .select("role")
-    .eq("id", data.user.id)
-    .maybeSingle();
+    // Vérification du rôle administrateur via la fonction sécurisée Supabase
+    const { data: isAdmin, error: adminError } = await supabaseClient.rpc("is_admin");
 
-  if (profileError) {
-    console.error(profileError);
+    if (adminError) {
+      console.error(adminError);
 
-    showMessage(
-      "Impossible de vérifier vos droits administrateur.",
-      "error"
-    );
+      showMessage(
+        "Impossible de vérifier vos droits administrateur.",
+        "error"
+      );
 
-    await supabaseClient.auth.signOut();
-    return;
-  }
+      await supabaseClient.auth.signOut();
+      return;
+    }
 
-  if (!profile || profile.role !== "admin") {
-    showMessage(
-      "Accès refusé. Vous n'avez pas les droits administrateur.",
-      "error"
-    );
+    if (isAdmin !== true) {
+      showMessage(
+        "Accès refusé. Vous n'avez pas les droits administrateur.",
+        "error"
+      );
 
-    await supabaseClient.auth.signOut();
-    return;
-  }
+      await supabaseClient.auth.signOut();
+      return;
+    }    
 
   // Connexion administrateur réussie
   showMessage(
