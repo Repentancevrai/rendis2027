@@ -89,18 +89,40 @@ async function initDashboard() {
         }
 
 
-        // ==========================================
+                // ==========================================
         // VERIFICATION DE L'ADMINISTRATEUR AUTORISE
         // ==========================================
 
-        const ADMIN_EMAIL =
-            "rendis2027bassam@gmail.com";
+        const {
+            data: isAdmin,
+            error: adminError
+        } = await supabaseClient.rpc("is_admin");
 
 
-        if (
-            session.user.email.toLowerCase() !==
-            ADMIN_EMAIL.toLowerCase()
-        ) {
+        if (adminError) {
+
+            console.error(
+                "Erreur lors de la vérification administrateur :",
+                adminError
+            );
+
+            if (adminWelcome) {
+
+                adminWelcome.textContent =
+                    "Impossible de vérifier vos droits administrateur.";
+
+            }
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href = "admin.html";
+
+            return;
+
+        }
+
+
+        if (isAdmin !== true) {
 
             await supabaseClient.auth.signOut();
 
