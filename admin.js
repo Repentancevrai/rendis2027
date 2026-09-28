@@ -68,10 +68,26 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 if (data.user) {
-  // Vérification directe de l'adresse e-mail administrateur
-  const ADMIN_EMAIL = "rendis2027bassam@gmail.com";
+    // Vérification du rôle administrateur dans Supabase
+  const { data: profile, error: profileError } = await supabaseClient
+    .from("profiles")
+    .select("role")
+    .eq("id", data.user.id)
+    .maybeSingle();
 
-  if (data.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+  if (profileError) {
+    console.error(profileError);
+
+    showMessage(
+      "Impossible de vérifier vos droits administrateur.",
+      "error"
+    );
+
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  if (!profile || profile.role !== "admin") {
     showMessage(
       "Accès refusé. Vous n'avez pas les droits administrateur.",
       "error"
