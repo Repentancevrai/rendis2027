@@ -34,7 +34,7 @@ const ORDER_PRICES = {
 
 const ORDER_LABELS = {
   economiqueQty: "Pin Économique",
-  premiumQty: "Pin Premium",
+  premiumQty: "Pin Premium",,
   pagnePieceQty: "Pagne officiel — 1 morceau",
   tshirtQty: "T-shirt RENDIS 2027 — Adulte",
   tshirtEnfantQty: "T-shirt RENDIS 2027 — Enfant",
@@ -169,7 +169,7 @@ function prepareOrderForm() {
     }
   }
 
-  // Moyen de paiement : un seul champ avec Djamo Business et les 2 liens WhatsApp.
+// Moyen de paiement : Djamo Business + un bouton WhatsApp unique pour finaliser la commande.
 const fieldset = orderForm.querySelector(".payment-methods");
 if (fieldset) {
   fieldset.innerHTML = `
@@ -185,25 +185,18 @@ if (fieldset) {
 
     <div style="margin-top:12px;">
       <p style="margin:0 0 8px;">
-        Pour TapTap Send, Western Union, MoneyGram, Wave ou Orange Money,
-        utilisez l’un des deux liens WhatsApp :
+        Pour finaliser votre commande et votre paiement ou don par WhatsApp :
       </p>
 
       <a
-        class="btn btn-ghost"
-        href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
+        class="btn btn-primary"
+        href="https://wa.me/2250141089295?text=Bonjour%2C%20s%27il%20vous%20pla%C3%AEt%0AJe%20veux%20finaliser%20ma%20commande%20et%2C%20si%20possible%2C%20faire%20mon%20don%20RENDIS%202027%20%E2%80%93%20Grand-Bassam%20via%20TapTap%20Send%2C%20Western%20Union%2C%20MoneyGram%2C%20Djamo%20Business%2C%20Wave%20ou%20Orange%20Money."
         target="_blank"
         rel="noopener noreferrer"
-      >WhatsApp RENDIS — lien 1</a>
-
-      <a
-        class="btn btn-ghost"
-        href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-        target="_blank"
-        rel="noopener noreferrer"
-      >WhatsApp RENDIS — lien 2</a>
+      >FINALISER LA COMMANDE</a>
     </div>
   `;
+}
 }
 
   orderForm.addEventListener("input", (event) => {
