@@ -46,9 +46,22 @@ function setText(selector, text) {
     el.textContent = text;
   });
 }
+function prepareDiasporaNotice() {
+  const orderForm = document.getElementById("orderForm");
+  if (!orderForm || document.getElementById("diasporaNotice")) return;
 
+  const notice = document.createElement("div");
+  notice.id = "diasporaNotice";
+  notice.style.cssText =
+    "margin:14px 0;padding:12px 14px;border-radius:12px;background:#f5f5f5;font-weight:600;line-height:1.5;";
+
+  notice.innerHTML =
+    "<strong>DIASPORA :</strong> Pour tous ceux de la diaspora, merci de vous référer aux couples KORÉ.";
+
+  orderForm.insertBefore(notice, orderForm.firstChild);
+}
 function getOrderData(orderForm) {
-  if (!orderForm) return { total: 0, items: [] };
+  if (!orderForm)  return { total: 0, items: [] };
 
   const fd = new FormData(orderForm);
   const items = [];
