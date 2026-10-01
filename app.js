@@ -181,32 +181,57 @@ function prepareOrderForm() {
     }
   }
 
-// Moyen de paiement : Djamo Business + un bouton WhatsApp unique pour finaliser la commande.
+// Secteur de paiement : orientation vers le contact correspondant.
 const fieldset = orderForm.querySelector(".payment-methods");
+
 if (fieldset) {
   fieldset.innerHTML = `
-    <legend>Choisissez votre moyen de paiement</legend>
+    <legend>Choisissez votre secteur de paiement</legend>
 
     <label class="radio-card">
-      <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS" required>
+      <input type="radio" name="paymentMethod" value="BASSAM_DIASPORA" required>
       <span>
-        <b>Djamo Business</b>
-        <small>Paiement via le lien professionnel officiel de RENDIS 2027.</small>
+        <b>📍 Bassam</b>
+        <small>Bassam + Diaspora → Couple KORÉ</small>
       </span>
     </label>
 
-    <div style="margin-top:12px;">
-      <p style="margin:0 0 8px;">
-        Pour finaliser votre commande et votre paiement ou don par WhatsApp :
-      </p>
+    <label class="radio-card">
+      <input type="radio" name="paymentMethod" value="BONOUA_ABOISSO">
+      <span>
+        <b>📍 Bonoua - Aboisso</b>
+        <small>Contact à venir</small>
+      </span>
+    </label>
 
-      <a
-        class="btn btn-primary"
-        href="https://wa.me/2250141089295?text=Bonjour%2C%20s%27il%20vous%20pla%C3%AEt%0AJe%20veux%20finaliser%20ma%20commande%20et%2C%20si%20possible%2C%20faire%20mon%20don%20RENDIS%202027%20%E2%80%93%20Grand-Bassam%20via%20TapTap%20Send%2C%20Western%20Union%2C%20MoneyGram%2C%20Djamo%20Business%2C%20Wave%20ou%20Orange%20Money."
-        target="_blank"
-        rel="noopener noreferrer"
-      >FINALISER LA COMMANDE</a>
-    </div>
+    <label class="radio-card">
+      <input type="radio" name="paymentMethod" value="KOUMASSI">
+      <span>
+        <b>📍 Koumassi</b>
+        <small>Contact à venir</small>
+      </span>
+    </label>
+
+    <label class="radio-card">
+      <input type="radio" name="paymentMethod" value="PORT_BOUET">
+      <span>
+        <b>📍 Port-Bouët</b>
+        <small>Contact à venir</small>
+      </span>
+    </label>
+
+    <p style="margin-top:14px;">
+      Le bouton <strong>FINALISER LA COMMANDE</strong>
+      dirigera automatiquement vers le contact correspondant.
+    </p>
+
+    <a
+      id="finalizeOrderLink"
+      class="btn btn-primary"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >FINALISER LA COMMANDE</a>
   `;
 }
 
@@ -264,9 +289,9 @@ orderForm.addEventListener("change", (event) => {
     }
 
     if (!paymentMethod) {
-      if (message) message.textContent = "Veuillez choisir Djamo Business.";
-      return;
-    }
+  if (message) message.textContent = "Veuillez choisir votre secteur de paiement.";
+  return;
+}
 
     if (!supabaseClient) {
       if (message) message.textContent = "La connexion Supabase doit encore être configurée.";
@@ -304,15 +329,10 @@ orderForm.addEventListener("change", (event) => {
 
       if (error) throw error;
 
-      if (paymentMethod === "DJAMO_BUSINESS") {
-        redirectDjamo();
-        if (message) message.textContent = "Commande enregistrée ✓ Ouverture de Djamo Business…";
-      } else {
-        if (message) {
-          message.textContent =
-            `Commande enregistrée ✓ ${paymentInstruction(paymentMethod, total)} Référence du transfert à conserver pour la vérification.`;
-        }
-      }
+      if (message) {ju tt
+  message.textContent =
+    `Commande enregistrée ✓ Secteur de paiement : ${paymentMethod}.`;
+}
 
       orderForm.reset();
       updateOrderTotal(orderForm);
