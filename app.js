@@ -169,42 +169,58 @@ function prepareOrderForm() {
     }
   }
 
-  // Moyen de paiement : un seul champ avec Djamo Business et les 2 liens WhatsApp.
-const fieldset = orderForm.querySelector(".payment-methods");
-if (fieldset) {
-  fieldset.innerHTML = `
-    <legend>Choisissez votre moyen de paiement</legend>
+    // Orientation vers le responsable du secteur pour finaliser la commande et/ou le don.
+  const fieldset = orderForm.querySelector(".payment-methods");
 
-    <label class="radio-card">
-      <input type="radio" name="paymentMethod" value="DJAMO_BUSINESS" required>
-      <span>
-        <b>Djamo Business</b>
-        <small>Paiement via le lien professionnel officiel de RENDIS 2027.</small>
-      </span>
-    </label>
+  const SECTOR_WHATSAPP = {
+    "BASSAM": [
+      "https://wa.me/2250141272857?text=Bonjour%2C%20je%20souhaite%20finaliser%20ma%20commande%20et%2Fou%20mon%20don%20RENDIS%202027.",
+      "https://wa.me/2250708193456?text=Bonjour%2C%20je%20souhaite%20finaliser%20ma%20commande%20et%2Fou%20mon%20don%20RENDIS%202027."
+    ]
+  };
 
-    <div style="margin-top:12px;">
-      <p style="margin:0 0 8px;">
-        Pour TapTap Send, Western Union, MoneyGram, Wave ou Orange Money,
-        utilisez l’un des deux liens WhatsApp :
+  if (fieldset) {
+    fieldset.innerHTML = `
+      <legend>Choisissez votre secteur pour finaliser votre commande et/ou votre don</legend>
+
+      <label class="radio-card">
+        <input type="radio" name="paymentMethod" value="BASSAM" required>
+        <span>
+          <b>Bassam — Bassam + Diaspora</b>
+          <small>Pour tous ceux de la diaspora, merci de vous référer aux couples KORÉ.</small>
+        </span>
+      </label>
+
+      <label class="radio-card">
+        <input type="radio" name="paymentMethod" value="BONOUA_ABOISSO" required>
+        <span>
+          <b>Bonoua - Aboisso</b>
+          <small>Contact à venir.</small>
+        </span>
+      </label>
+
+      <label class="radio-card">
+        <input type="radio" name="paymentMethod" value="KOUMASSI" required>
+        <span>
+          <b>Koumassi</b>
+          <small>Contact à venir.</small>
+        </span>
+      </label>
+
+      <label class="radio-card">
+        <input type="radio" name="paymentMethod" value="PORT_BOUET" required>
+        <span>
+          <b>Port-Bouët</b>
+          <small>Contact à venir.</small>
+        </span>
+      </label>
+
+      <p id="paymentInstruction" class="form-message" role="status">
+        Sélectionnez votre secteur pour obtenir les instructions de finalisation.
       </p>
+    `;
+  }
 
-      <a
-        class="btn btn-ghost"
-        href="https://wa.me/22541089295?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-        target="_blank"
-        rel="noopener noreferrer"
-      >WhatsApp RENDIS — lien 1</a>
-
-      <a
-        class="btn btn-ghost"
-        href="https://wa.me/2250748961624?text=Bonjour%2C%20S%27il%20vous%20je%20veux%20faire%20mon%20don%20RENDIS%202027%20BASSAM%20via%20TapTap%20Send%20%2C%20western.%20Union%2C%20MoneyGram%20ou%20Djamo%20Business%20%20%2C%20Wave%20%26%20orange%20Money."
-        target="_blank"
-        rel="noopener noreferrer"
-      >WhatsApp RENDIS — lien 2</a>
-    </div>
-  `;
-}
 
   orderForm.addEventListener("input", (event) => {
   if (event.target?.matches('input[name$="Qty"]')) {
