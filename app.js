@@ -315,15 +315,23 @@ orderForm.addEventListener("change", (event) => {
 
       if (error) throw error;
 
-      if (paymentMethod === "DJAMO_BUSINESS") {
-        redirectDjamo();
-        if (message) message.textContent = "Commande enregistrée ✓ Ouverture de Djamo Business…";
-      } else {
-        if (message) {
-          message.textContent =
-            `Commande enregistrée ✓ ${paymentInstruction(paymentMethod, total)} Référence du transfert à conserver pour la vérification.`;
-        }
-      }
+const whatsappLinks = SECTOR_WHATSAPP[paymentMethod];
+
+if (whatsappLinks?.length) {
+  whatsappLinks.forEach((url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  if (message) {
+    message.textContent =
+      "Commande enregistrée ✓ Ouverture de WhatsApp pour finaliser votre commande et/ou votre don.";
+  }
+} else {
+  if (message) {
+    message.textContent =
+      "Commande enregistrée ✓ Le contact WhatsApp de ce secteur sera communiqué prochainement.";
+  }
+}
 
       orderForm.reset();
       updateOrderTotal(orderForm);
