@@ -34,7 +34,7 @@ const ORDER_PRICES = {
 
 const ORDER_LABELS = {
   economiqueQty: "Pin Économique",
-  premiumQty: "Pin Premium",,
+  premiumQty: "Pin Premium",
   pagnePieceQty: "Pagne officiel — 1 morceau",
   tshirtQty: "T-shirt RENDIS 2027 — Adulte",
   tshirtEnfantQty: "T-shirt RENDIS 2027 — Enfant",
