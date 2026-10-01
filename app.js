@@ -197,7 +197,7 @@ if (fieldset) {
     </div>
   `;
 }
-}
+
 
   orderForm.addEventListener("input", (event) => {
   if (event.target?.matches('input[name$="Qty"]')) {
