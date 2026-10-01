@@ -309,9 +309,11 @@ orderForm.addEventListener("change", (event) => {
     }
 
     if (!paymentMethod) {
-      if (message) message.textContent = "Veuillez choisir Djamo Business.";
-      return;
-    }
+  if (message) {
+    message.textContent = "Veuillez choisir votre secteur de paiement.";
+  }
+  return;
+}
 
     if (!supabaseClient) {
       if (message) message.textContent = "La connexion Supabase doit encore être configurée.";
@@ -349,14 +351,10 @@ orderForm.addEventListener("change", (event) => {
 
       if (error) throw error;
 
-      if (paymentMethod === "DJAMO_BUSINESS") {
-        redirectDjamo();
-        if (message) message.textContent = "Commande enregistrée ✓ Ouverture de Djamo Business…";
-      } else {
-        if (message) {
-          message.textContent =
-            `Commande enregistrée ✓ ${paymentInstruction(paymentMethod, total)} Référence du transfert à conserver pour la vérification.`;
-        }
+      if (message) {
+  message.textContent =
+    `Commande enregistrée ✓ Secteur de paiement : ${paymentMethod}. Vous pouvez maintenant finaliser votre commande.`;
+}
       }
 
       orderForm.reset();
