@@ -424,6 +424,7 @@ function boot() {
   orientSiteAsBoutique();
   prepareProductImages();
   const orderForm = prepareOrderForm();
+  prepareDiasporaNotice();
   replacePaymentSection();
   removeCollectionAndDonationSections();
   prepareMedia();
