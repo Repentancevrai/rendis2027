@@ -15,8 +15,7 @@ if (
 
 function money(n) {
   return new Intl.NumberFormat("fr-FR").format(Math.round(Number(n) || 0)) + " FCFA";
-}
-
+} 
 function clean(value) {
   return String(value || "").trim();
 }const ORANGE_MONEY = clean(cfg.ORANGE_MONEY_NUMBER);
