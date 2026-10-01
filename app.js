@@ -375,10 +375,7 @@ function removeCollectionAndDonationSections() {
   document.querySelectorAll("#contributionForm, #ambassadorForm, #aidForm")
     .forEach((form) => form.closest("section")?.remove());
 
-  // La vidéo existante est retirée de l'affichage, sans toucher aux chansons.
-  document.querySelectorAll("video").forEach((video) => {
-    video.closest("article, figure, .media-feature, .media-slot")?.remove() || video.remove();
-  });
+  
 }
 
 function prepareMedia() {
