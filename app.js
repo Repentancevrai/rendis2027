@@ -318,13 +318,17 @@ orderForm.addEventListener("change", (event) => {
 const whatsappLinks = SECTOR_WHATSAPP[paymentMethod];
 
 if (whatsappLinks?.length) {
-  whatsappLinks.forEach((url) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  });
-
   if (message) {
-    message.textContent =
-      "Commande enregistrée ✓ Ouverture de WhatsApp pour finaliser votre commande et/ou votre don.";
+    message.innerHTML = `
+      Commande enregistrée ✓<br>
+      <strong>Pour finaliser votre commande et/ou votre don :</strong><br>
+      <a class="btn btn-ghost" href="${whatsappLinks[0]}" target="_blank" rel="noopener noreferrer">
+        WhatsApp Couple KORÉ — 1
+      </a>
+      <a class="btn btn-ghost" href="${whatsappLinks[1]}" target="_blank" rel="noopener noreferrer">
+        WhatsApp Couple KORÉ — 2
+      </a>
+    `;
   }
 } else {
   if (message) {
