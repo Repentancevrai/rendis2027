@@ -81,16 +81,29 @@ async function loadStats() {
 }
 // ==================== PRÉCOMMANDES ====================
 const ORDER_PRICES = {
-  basiqueQty: 10000,
-  economiqueQty: 15000,
-  premiumQty: 25000,
+  
+  economiqueQty: 10000,
+  premiumQty: 20000,
   pagnePieceQty: 7000,
+  pagneBleuQty: 6000,
+  pagneJauneQty: 7000,
+  tshirtQty: 4000,
+  tshirtEnfantQty: 2000,
+  poloQty: 5000,
+  sacQty: 4000
 };
+
 const ORDER_LABELS = {
-  basiqueQty: "Pin Basique",
+  
   economiqueQty: "Pin Économique",
   premiumQty: "Pin Premium",
-  pagnePieceQty: "Pagne 1 morceau",
+  pagnePieceQty: "Pagne officiel",
+  pagneBleuQty: "Pagne bleu",
+  pagneJauneQty: "Pagne jaune",
+  tshirtQty: "T-shirt adulte",
+  tshirtEnfantQty: "T-shirt enfant",
+  poloQty: "Polo",
+  sacQty: "Sac"
 };
 function getOrderData() {
   if (!orderForm) return { total: 0, items: [] };
