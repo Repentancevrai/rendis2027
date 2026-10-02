@@ -214,7 +214,7 @@ try {
       "_blank"
     );
   }
-      console.error("Erreur précommande :", error);
+    catch (error) {  console.error("Erreur précommande :", error);
       const code = clean(error?.code);
       const message = clean(error?.message);
       const details = clean(error?.details);
