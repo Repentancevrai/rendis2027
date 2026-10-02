@@ -133,53 +133,87 @@ if (orderForm) {
     const name = clean(fd.get("name"));
     const phone = clean(fd.get("phone"));
     const city = clean(fd.get("city"));
-    const paymentMethod = clean(fd.get("paymentMethod"));
-    const comment = clean(fd.get("message"));
-    const { total, items } = getOrderData();
-    if (!name || !phone || total <= 0 || !items.length) {
-      setMessage(orderMessage, "Veuillez remplir votre nom, votre téléphone et choisir au moins un article.");
-      return;
-    }
-    if (!paymentMethod) {
-      setMessage(orderMessage, "Veuillez choisir votre moyen de paiement : NOWPayments ou Djamo Business.");
-      return;
-    }
-    if (!supabaseClient) {
-      setMessage(orderMessage, "La connexion Supabase doit encore être configurée.");
-      return;
-    }
-    const details = [
-      "[PRECOMMANDE]",
-      `Articles: ${items.join(", ")}`,
-      `Moyen de paiement: ${paymentMethod}`,
-      city ? `Ville / secteur: ${city}` : "",
-      comment ? `Commentaire: ${comment}` : ""
-    ].filter(Boolean).join(" | ");
-    const payload = {
-      name,
-      phone,
-      amount: total,
-      message: details,
-      status: "A_VERIFIER"
-    };
-    try {
-      setMessage(orderMessage, "Précommande en cours d'enregistrement...");
-      const { error } = await supabaseClient
-        .from("contributions")
-        .insert(payload);
-      if (error) throw error;
-      loadStats();
-      if (redirectToPayment(paymentMethod)) return;
-      if (paymentMethod === "NOWPAYMENTS") {
-        setMessage(orderMessage,
-          "Précommande enregistrée. Le lien NOWPayments n'est pas encore configuré ; votre demande est conservée pour vérification."
-        );
-      } else {
-        setMessage(orderMessage,
-          "Précommande enregistrée. Le lien de paiement sélectionné n'est pas encore configuré."
-        );
-      }
-    } catch (error) {
+    const sector = clean(fd.get("city"));
+const comment = clean(fd.get("message"));
+const { total, items } = getOrderData();
+
+if (!name || !phone || total <= 0 || !items.length) {
+  setMessage(
+    orderMessage,
+    "Veuillez remplir votre nom, votre téléphone, votre secteur et choisir au moins un article."
+  );
+  return;
+}
+
+if (!sector) {
+  setMessage(
+    orderMessage,
+    "Veuillez indiquer votre secteur."
+  );
+  return;
+}
+
+if (!supabaseClient) {
+  setMessage(
+    orderMessage,
+    "La connexion Supabase doit encore être configurée."
+  );
+  return;
+}
+
+const details = [
+  "[PRECOMMANDE]",
+  `Articles: ${items.join(", ")}`,
+  `Secteur: ${sector}`,
+  comment ? `Commentaire: ${comment}` : ""
+].filter(Boolean).join(" | ");
+
+const payload = {
+  name,
+  phone,
+  amount: total,
+  message: details,
+  status: "A_VERIFIER"
+};
+
+try {
+  setMessage(orderMessage, "Précommande en cours d'enregistrement...");
+
+  const { error } = await supabaseClient
+    .from("contributions")
+    .insert(payload);
+
+  if (error) throw error;
+
+  loadStats();
+
+  setMessage(
+    orderMessage,
+    "Précommande enregistrée. Vous allez maintenant contacter le représentant de votre secteur."
+  );
+
+  const normalizedSector = sector
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (
+    normalizedSector.includes("bassam") ||
+    normalizedSector.includes("grand-bassam")
+  ) {
+    const whatsappMessage =
+      `Bonjour Couples KORE, je viens du site RENDIS 2027.%0A%0A` +
+      `Nom : ${encodeURIComponent(name)}%0A` +
+      `Téléphone : ${encodeURIComponent(phone)}%0A` +
+      `Secteur : ${encodeURIComponent(sector)}%0A` +
+      `Précommande : ${encodeURIComponent(items.join(", "))}%0A` +
+      `Total : ${encodeURIComponent(money(total))}`;
+
+    window.open(
+      `https://wa.me/2250141272857?text=${whatsappMessage}`,
+      "_blank"
+    );
+  }
       console.error("Erreur précommande :", error);
       const code = clean(error?.code);
       const message = clean(error?.message);
