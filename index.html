@@ -75,7 +75,7 @@
    <article class="product-card"><img src="images/pagne-rendis-officiel.jpg" alt="Pagne bleu officiel RENDIS 2027 avec le logo de l'Église"><div class="product-body"><span class="product-tag gold-tag">MODÈLE OFFICIEL UNIQUE</span><h3>Le pagne RENDIS 2027</h3><div class="price-list"><div><b>Pagne bleu — 1 morceau</b><strong>6 000 FCFA</strong></div></div><p class="muted">Un seul modèle officiel est retenu pour une identité visuelle forte et cohérente.</p></div></article>
   </div>
   <div class="order-panel">
-   <div><p class="eyebrow">BON DE PRÉCOMMANDE</p><h3>Je réserve mes articles</h3><p class="muted">Enregistrez votre demande, puis choisissez votre moyen de paiement. L'équipe pourra ensuite vérifier et confirmer votre commande.</p></div>
+   <div><p class="eyebrow">BON DE PRÉCOMMANDE</p><h3>Je réserve mes articles</h3><p class="muted">Enregistrez votre demande, puis contactez le représentant de votre secteur sur WhatsApp. L'équipe pourra ensuite vérifier et confirmer votre commande.</p></div>
    <form id="orderForm" class="form">
     <div class="form-grid"><label>Nom complet<input name="name" required maxlength="120" placeholder="Votre nom complet"></label><label>Téléphone<input name="phone" required maxlength="30" placeholder="+225 ..." autocomplete="tel"></label><label>Ville / secteur<input name="city" maxlength="120" placeholder="Grand-Bassam, Bonoua, Abidjan…"></label></div>
     <div class="order-row">
@@ -120,9 +120,10 @@
 </div>
     
     <div class="order-total"><span>Total de votre précommande</span><strong id="orderTotal">0 FCFA</strong></div>
-    <fieldset class="payment-methods"><legend>Choisissez votre moyen de paiement</legend><label class="radio-card"><input type="radio" name="paymentMethod" value="NOWPAYMENTS" required><span><b>NOWPayments</b><small>Paiement en ligne / crypto via une page sécurisée.</small></span></label><label class="radio-card"><input type="radio" name="paymentMethod" value="DJAMO_BUSINESS"><span><b>Djamo Business</b><small>Paiement via le lien professionnel officiel RENDIS.</small></span></label></fieldset>
+    <!-- Ancienne section de paiement masquée et désactivée : le parcours passe désormais par le représentant du secteur (WhatsApp). -->
+    <fieldset class="payment-methods" hidden disabled style="display:none"><legend>Choisissez votre moyen de paiement</legend><label class="radio-card"><input type="radio" name="paymentMethod" value="NOWPAYMENTS"><span><b>NOWPayments</b><small>Paiement en ligne / crypto via une page sécurisée.</small></span></label><label class="radio-card"><input type="radio" name="paymentMethod" value="DJAMO_BUSINESS"><span><b>Djamo Business</b><small>Paiement via le lien professionnel officiel RENDIS.</small></span></label></fieldset>
     <label>Commentaire<textarea name="message" rows="3" maxlength="500" placeholder="Livraison, précision, etc."></textarea></label>
-    <button class="btn" type="submit">Enregistrer et continuer vers le paiement</button><p id="orderMessage" class="form-message" role="status"></p>
+    <button class="btn" type="submit">Enregistrer ma précommande et contacter mon représentant</button><p id="orderMessage" class="form-message" role="status"></p>
    </form>
   </div>
  </div>
