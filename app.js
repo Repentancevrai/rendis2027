@@ -25,24 +25,8 @@ function money(n) {
 function clean(value) {
   return String(value || "").trim();
 }
-function paymentUrl(method) {
-  if (method === "DJAMO_BUSINESS") return clean(cfg.DJAMO_BUSINESS_PAYMENT_LINK);
-  if (method === "NOWPAYMENTS") {
-    return clean(cfg.NOWPAYMENTS_PAYMENT_LINK || cfg.NOWPAYMENTS_PAYMENT_URL || cfg.NOWPAYMENTS_URL);
-  }
-  return "";
-}
-function isRealPaymentUrl(url) {
-  return /^https?:\/\//i.test(url) && !url.includes("PASTE_");
-}
 function setMessage(element, text) {
   if (element) element.textContent = text;
-}
-function redirectToPayment(method) {
-  const url = paymentUrl(method);
-  if (!isRealPaymentUrl(url)) return false;
-  window.location.href = url;
-  return true;
 }
 // ==================== STATISTIQUES ====================
 async function loadStats() {
@@ -238,20 +222,6 @@ catch (error) {  console.error("Erreur précommande :", error);
   });
   updateOrderTotal();
 }
-// ==================== BOUTONS DE PAIEMENT ====================
-document.querySelectorAll(".payment-link").forEach((button) => {
-  button.addEventListener("click", () => {
-    const method = button.dataset.payment || "";
-    if (redirectToPayment(method)) return;
-    if (method === "DJAMO_BUSINESS") {
-      alert("Le lien Djamo Business n'est pas encore configuré.");
-    } else if (method === "NOWPAYMENTS") {
-      alert("Le lien NOWPayments n'est pas encore configuré.");
-    } else {
-      alert("Moyen de paiement non configuré.");
-    }
-  });
-});
 // ==================== CONTRIBUTION FINANCIÈRE ====================
 if (contributionForm) {
   contributionForm.addEventListener("submit", async (e) => {
