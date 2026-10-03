@@ -213,6 +213,10 @@ try {
       `https://wa.me/2250141272857?text=${whatsappMessage}`,
       "_blank"
     );
+  } else {
+    // Orientation vers les représentants de secteur (contacts WhatsApp)
+    const contactSection = document.getElementById("paiements");
+    if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
   }
 }
 catch (error) {  console.error("Erreur précommande :", error);
