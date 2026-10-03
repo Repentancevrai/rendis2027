@@ -90,7 +90,8 @@ const ORDER_PRICES = {
   tshirtQty: 4000,
   tshirtEnfantQty: 2000,
   poloQty: 5000,
-  sacQty: 4000
+  sacQty: 4000,
+  casquetteQty: 5000
 };
 
 const ORDER_LABELS = {
@@ -103,7 +104,8 @@ const ORDER_LABELS = {
   tshirtQty: "T-shirt adulte",
   tshirtEnfantQty: "T-shirt enfant",
   poloQty: "Polo",
-  sacQty: "Sac"
+  sacQty: "Sac",
+  casquetteQty: "Casquette RENDIS 2027 — Grand-Bassam"
 };
 function getOrderData() {
   if (!orderForm) return { total: 0, items: [] };
