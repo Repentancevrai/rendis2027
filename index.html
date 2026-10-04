@@ -21,7 +21,36 @@
   .church-identity img{width:58px;height:58px}
   .church-identity strong{font-size:.7rem}
   .church-identity span{font-size:.76rem}
-</style>
+.annonces-images{
+  display:flex;
+  gap:16px;
+  overflow:hidden;
+  width:100%;
+  padding:10px 0;
+}
+
+.annonces-images img{
+  flex:0 0 80%;
+  max-width:520px;
+  height:260px;
+  object-fit:cover;
+  border-radius:16px;
+  animation:annoncesDefile 18s linear infinite;
+}
+
+.annonces-images img:nth-child(2){animation-delay:-3.6s;}
+.annonces-images img:nth-child(3){animation-delay:-7.2s;}
+.annonces-images img:nth-child(4){animation-delay:-10.8s;}
+.annonces-images img:nth-child(5){animation-delay:-14.4s;}
+
+@keyframes annoncesDefile{
+  0%{transform:translateX(110%);opacity:0;}
+  8%{opacity:1;}
+  20%{transform:translateX(0);}
+  75%{transform:translateX(0);}
+  92%{opacity:1;}
+  100%{transform:translateX(-120%);opacity:0;}
+  }</style>
 </head>
 <body>
 <header class="site-header">
