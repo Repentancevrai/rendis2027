@@ -108,59 +108,50 @@
       <p>Découvrez les moments forts de RENDIS 2027 GRAND-BASSAM.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+  <div style="position:relative;width:100%;max-width:700px;margin:20px auto;overflow:hidden;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.12);background:#fff;">
 
-  
+  <div id="annoncesCarousel" style="display:flex;transition:transform .8s ease-in-out;width:400%;">
 
-      <iframe
-        src="https://www.youtube.com/embed/8gqUfuLKrUc"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        src="https://www.youtube.com/embed/cED5x4ejLSw"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        src="https://www.youtube.com/embed/rhM-7XBOomo"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        src="https://www.youtube.com/embed/PWpiE8J3pCo"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        src="https://www.youtube.com/embed/o1tMxV0KZLs"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        src="https://www.youtube.com/embed/XMSe3PGZWSA"
-        title="Moment fort RENDIS 2027"
-        style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px;"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-
+    <div style="width:25%;flex-shrink:0;">
+      <img src="images/IMG-20260918-WA0010(1).jpg"
+           alt="Annonce RENDIS 2027"
+           style="width:100%;display:block;">
     </div>
+
+    <div style="width:25%;flex-shrink:0;">
+      <img src="images/IMG-20261001-WA0000(1).jpg"
+           alt="Annonce RENDIS 2027"
+           style="width:100%;display:block;">
+    </div>
+
+    <div style="width:25%;flex-shrink:0;">
+      <img src="images/IMG-20261005-WA0023.jpg"
+           alt="Annonce RENDIS 2027"
+           style="width:100%;display:block;">
+    </div>
+
+    <div style="width:25%;flex-shrink:0;">
+      <img src="images/Screenshot_20261005-153155.png"
+           alt="Annonce RENDIS 2027"
+           style="width:100%;display:block;">
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function(){
+  let index = 0;
+  const carousel = document.getElementById("annoncesCarousel");
+  const total = 4;
+
+  setInterval(function(){
+    index = (index + 1) % total;
+    carousel.style.transform = "translateX(-" + (index * 25) + "%)";
+  }, 10000);
+})();
+</script>
   </div>
   </section>
 <section id="precommandes" class="section section-priority">
