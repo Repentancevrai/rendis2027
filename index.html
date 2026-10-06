@@ -40,7 +40,6 @@
 .annonces-images img:nth-child(3){animation-delay:-7.2s;}
 .annonces-images img:nth-child(4){animation-delay:-10.8s;}
 .annonces-images img:nth-child(5){animation-delay:-14.4s;}
-
 @keyframes annoncesDefile{
   0%{transform:translateX(110%);opacity:0;}
   8%{opacity:1;}
@@ -105,45 +104,35 @@
       <h2>LES MOMENTS FORTS DU LANCEMENT</h2>
       <p>Découvrez les moments forts de RENDIS 2027 GRAND-BASSAM.</p>
     </div>
-
   <div style="position:relative;width:100%;max-width:700px;margin:20px auto;overflow:hidden;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.12);background:#fff;">
-
   <div id="annoncesCarousel" style="display:flex;transition:transform .8s ease-in-out;width:400%;">
-
-    <div style="width:25%;flex-shrink:0;">
+   <div style="width:25%;flex-shrink:0;">
       <img src="images/IMG-20260918-WA0010(1).jpg"
            alt="Annonce RENDIS 2027"
            style="width:100%;display:block;">
     </div>
-
     <div style="width:25%;flex-shrink:0;">
       <img src="images/IMG-20261001-WA0000(1).jpg"
            alt="Annonce RENDIS 2027"
            style="width:100%;display:block;">
     </div>
-
-    <div style="width:25%;flex-shrink:0;">
+  <div style="width:25%;flex-shrink:0;">
       <img src="images/IMG-20261005-WA0023.jpg"
            alt="Annonce RENDIS 2027"
            style="width:100%;display:block;">
     </div>
-
     <div style="width:25%;flex-shrink:0;">
       <img src="images/IMG-20261005-WA0011.jpg"
            alt="Annonce RENDIS 2027"
            style="width:100%;display:block;">
     </div>
-
   </div>
-
 </div>
-
 <script>
 (function(){
   let index = 0;
   const carousel = document.getElementById("annoncesCarousel");
   const total = 4;
-
   setInterval(function(){
     index = (index + 1) % total;
     carousel.style.transform = "translateX(-" + (index * 25) + "%)";
@@ -168,50 +157,41 @@
   <label>Pin Économique — 10 000 FCFA
     <input name="economiqueQty" type="number" min="0" step="1" value="0">
   </label>
-
   <label>Pin Premium — 20 000 FCFA
     <input name="premiumQty" type="number" min="0" step="1" value="0">
   </label>
 </div>
-
 <div class="order-row">
   <label>Pagne bleu — 6 000 FCFA
     <input name="pagneBleuQty" type="number" min="0" step="1" value="0">
   </label>
-
   <!-- Pagne jaune masqué temporairement : retirer l'attribut hidden pour le réactiver -->
   <label hidden>Pagne jaune — 7 000 FCFA
     <input name="pagneJauneQty" type="number" min="0" step="1" value="0">
   </label>
 </div>
-
      <div class="order-row">
   <label>T-shirt adulte — 4 000 FCFA
     <input name="tshirtQty" type="number" min="0" step="1" value="0">
   </label>
-
   <label>T-shirt enfant — 2 000 FCFA
     <input name="tshirtEnfantQty" type="number" min="0" step="1" value="0">
   </label>
 </div>
-
 <div class="order-row">
   <label>Polo — 5 000 FCFA
     <input name="poloQty" type="number" min="0" step="1" value="0">
   </label>
-
   <label>Sac — 4 000 FCFA
     <input name="sacQty" type="number" min="0" step="1" value="0">
   </label>
 </div>
-
 <div class="order-row">
   <label>Casquette RENDIS 2027 — Grand-Bassam — 5 000 FCFA
     <input name="casquetteQty" id="casquetteQty" type="number" min="0" step="1" value="0">
   </label>
 </div>
-    
-    <div class="order-total"><span>Total de votre précommande</span><strong id="orderTotal">0 FCFA</strong></div>
+        <div class="order-total"><span>Total de votre précommande</span><strong id="orderTotal">0 FCFA</strong></div>
     <p class="muted"><strong>Aucun paiement direct sur le site.</strong> Finalisation par le représentant du secteur.</p>
     <label>Commentaire<textarea name="message" rows="3" maxlength="500" placeholder="Livraison, précision, etc."></textarea></label>
     <button class="btn" type="submit">Enregistrer ma précommande et contacter mon représentant</button><p id="orderMessage" class="form-message" role="status"></p>
@@ -221,7 +201,6 @@
 </section>
 <section id="paiements" class="section">
   <div class="container">
-
     <div class="section-heading">
       <p class="eyebrow">ORIENTATION & CONTACT</p>
       <h2>Choisissez votre secteur</h2>
@@ -231,28 +210,23 @@
         de votre secteur.
       </p>
     </div>
-
-    <div class="payment-grid">
-
-      <!-- BASSAM -->
+   <div class="payment-grid">
+     <!-- BASSAM -->
       <article class="payment-card">
         <div class="payment-card-head">
           <span class="payment-badge">GRAND-BASSAM + DIASPORA</span>
           <h3>Grand-Bassam + Diaspora</h3>
         </div>
-
-        <p>
+    <p>
           Grand-Bassam et membres de la diaspora :
           veuillez vous référer aux couples KORÉ.
         </p>
-
-        <ul class="clean-list">
+  <ul class="clean-list">
           <li>Représentants : Couples KORÉ</li>
           <li>Disponible pour Bassam</li>
           <li>Accompagnement de la diaspora</li>
         </ul>
-
-        <a
+  <a
           class="btn btn-ghost"
           href="https://wa.me/2250141272857?text=Bonjour%20Couples%20KORÉ%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
           target="_blank"
@@ -260,8 +234,7 @@
         >
           Contacter les Couples KORÉ
         </a>
-
-        <a
+    <a
           class="btn btn-ghost"
           href="https://wa.me/2250708193456?text=Bonjour%20Couples%20KORÉ%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
           target="_blank"
@@ -276,17 +249,14 @@
           <span class="payment-badge">BONOUA</span>
           <h3>Bonoua</h3>
         </div>
-
-        <p>
+    <p>
           Point focal du secteur : Mme Dihi Effoua
         </p>
-
-        <ul class="clean-list">
+  <ul class="clean-list">
           <li>Point focal : Mme Dihi Effoua</li>
           <li>Commande, contribution et informations</li>
         </ul>
-
-        <a
+   <a
           class="btn btn-ghost"
           href="https://wa.me/2250759310155?text=Bonjour%20Mme%20Dihi%20Effoua%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
           target="_blank"
@@ -301,12 +271,10 @@
           <span class="payment-badge">ABOISSO</span>
           <h3>Aboisso</h3>
         </div>
-
-        <p>
+ <p>
           Point focal du secteur : Mme BAH SEBO
         </p>
-
-        <ul class="clean-list">
+   <ul class="clean-list">
           <li>Point focal : Mme BAH SEBO</li>
           <li>Commande, contribution et informations</li>
         </ul>
@@ -328,8 +296,7 @@
       <p>
           Point focal du secteur : Anne Seri
         </p>
-
-        <ul class="clean-list">
+   <ul class="clean-list">
           <li>Point focal : Anne Seri</li>
           <li>Commande, contribution et informations</li>
         </ul>
@@ -356,8 +323,7 @@
           <li>Point focal : Matata Yao</li>
           <li>Commande, contribution et informations</li>
         </ul>
-
-        <a
+   <a
           class="btn btn-ghost"
           href="https://wa.me/2250102676721?text=Bonjour%20Matata%20Yao%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
           target="_blank"
@@ -366,15 +332,12 @@
           Contacter Matata Yao
         </a>
       </article>
-
-    </div>
-
+  </div>
     <div class="trust-row">
       <span>📌 Aucun paiement direct sur le site</span>
       <span>💬 Finalisation par le représentant</span>
       <span>🌍 DIASPORA : Pour tous ceux de la diaspora, merci de vous référer aux couples KORÉ.</span>
     </div>
-
   </div>
 </section>
 <!-- Idées modèles : simples idées, pas une liste officielle de produits -->
@@ -437,25 +400,21 @@
       <p><strong>Aucun paiement direct n'est effectué sur ce site.</strong></p>
       <p>Contribution / demande → Couples KORÉ → vérification et finalisation par le représentant.</p>
     </div>
-
     <article class="payment-card">
       <div class="payment-card-head">
         <span class="payment-badge">GRAND-BASSAM + DIASPORA</span>
         <h3>Grand-Bassam + Diaspora</h3>
       </div>
-
-      <p>
+   <p>
         Grand-Bassam et membres de la diaspora :
         veuillez vous référer aux couples KORÉ.
       </p>
-
-      <ul class="clean-list">
+ <ul class="clean-list">
         <li>Représentants : Couples KORÉ</li>
         <li>Disponible pour Bassam</li>
         <li>Accompagnement de la diaspora</li>
       </ul>
-
-      <div style="display:flex;flex-wrap:wrap;gap:12px">
+   <div style="display:flex;flex-wrap:wrap;gap:12px">
         <a
           class="btn"
           href="https://wa.me/2250141272857?text=Bonjour%20Couples%20KORÉ%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
@@ -464,8 +423,7 @@
         >
           Contacter les Couples KORÉ
         </a>
-
-        <a
+   <a
           class="btn btn-ghost"
           href="https://wa.me/2250708193456?text=Bonjour%20Couples%20KORÉ%2C%20je%20viens%20du%20site%20RENDIS%202027.%20Je%20souhaite%20finaliser%20ma%20commande%20ou%20ma%20contribution."
           target="_blank"
