@@ -183,27 +183,33 @@ try {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-  if (
-    normalizedSector.includes("bassam") ||
-    normalizedSector.includes("grand-bassam")
-  ) {
-    const whatsappMessage =
-      `Bonjour Couples KORE, je viens du site RENDIS 2027.%0A%0A` +
-      `Nom : ${encodeURIComponent(name)}%0A` +
-      `Téléphone : ${encodeURIComponent(phone)}%0A` +
-      `Secteur : ${encodeURIComponent(sector)}%0A` +
-      `Précommande : ${encodeURIComponent(items.join(", "))}%0A` +
-      `Total : ${encodeURIComponent(money(total))}`;
+if (
+  normalizedSector.includes("bassam") ||
+  normalizedSector.includes("grand-bassam")
+) {
+  const whatsappMessage =
+    `Bonjour Couples KORE, je viens du site RENDIS 2027.%0A%0A` +
+    `👤 Nom : ${encodeURIComponent(name)}%0A` +
+    `📞 Téléphone : ${encodeURIComponent(phone)}%0A` +
+    `📍 Secteur : ${encodeURIComponent(sector)}%0A%0A` +
+    `🛒 PRÉCOMMANDE :%0A` +
+    `${encodeURIComponent(items.join("\n"))}%0A%0A` +
+    `💰 TOTAL : ${encodeURIComponent(money(total))}%0A` +
+    (comment
+      ? `💬 Commentaire : ${encodeURIComponent(comment)}`
+      : "");
 
-    window.open(
-      `https://wa.me/2250141272857?text=${whatsappMessage}`,
-      "_blank"
-    );
-  } else {
-    // Orientation vers les représentants de secteur (contacts WhatsApp)
-    const contactSection = document.getElementById("paiements");
-    if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
+  window.open(
+    `https://wa.me/2250141272857?text=${whatsappMessage}`,
+    "_blank"
+  );
+} else {
+  // Orientation vers les représentants de secteur (contacts WhatsApp)
+  const contactSection = document.getElementById("paiements");
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: "smooth" });
   }
+}
 }
 catch (error) {  console.error("Erreur précommande :", error);
       const code = clean(error?.code);
