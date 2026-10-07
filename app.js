@@ -179,16 +179,52 @@ try {
   );
 
   const normalizedSector = sector
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "");
+
+const contacts = {
+  bassam: "2250141272857",
+  koreMme: "2250708193456",
+  bonoua: "2250759310155",
+  aboisso: "2250747257919",
+  koumassi: "2250152016099",
+  portBouet: "2250102676721"
+};
+
+let whatsappNumber = "";
+let contactName = "";
 
 if (
   normalizedSector.includes("bassam") ||
-  normalizedSector.includes("grand-bassam")
+  normalizedSector.includes("grand-bassam") ||
+  normalizedSector.includes("diaspora")
 ) {
+  whatsappNumber = contacts.bassam;
+  contactName = "M. KORÉ";
+} else if (normalizedSector.includes("bonoua")) {
+  whatsappNumber = contacts.bonoua;
+  contactName = "Mme Dihi Effoua";
+} else if (
+  normalizedSector.includes("aboisso") ||
+  normalizedSector.includes("ehania")
+) {
+  whatsappNumber = contacts.aboisso;
+  contactName = "Mme BAH SEBO";
+} else if (normalizedSector.includes("koumassi")) {
+  whatsappNumber = contacts.koumassi;
+  contactName = "Anne Sery";
+} else if (
+  normalizedSector.includes("port-bouet") ||
+  normalizedSector.includes("port bouet")
+) {
+  whatsappNumber = contacts.portBouet;
+  contactName = "MATATA YAO";
+}
+
+if (whatsappNumber) {
   const whatsappMessage =
-    `Bonjour Couples KORE, je viens du site RENDIS 2027.%0A%0A` +
+    `Bonjour ${contactName}, je viens du site RENDIS 2027.%0A%0A` +
     `👤 Nom : ${encodeURIComponent(name)}%0A` +
     `📞 Téléphone : ${encodeURIComponent(phone)}%0A` +
     `📍 Secteur : ${encodeURIComponent(sector)}%0A%0A` +
@@ -200,11 +236,10 @@ if (
       : "");
 
   window.open(
-    `https://wa.me/2250141272857?text=${whatsappMessage}`,
+    `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
     "_blank"
   );
 } else {
-  // Orientation vers les représentants de secteur (contacts WhatsApp)
   const contactSection = document.getElementById("paiements");
   if (contactSection) {
     contactSection.scrollIntoView({ behavior: "smooth" });
