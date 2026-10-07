@@ -88,22 +88,21 @@ async function initDashboard() {
 
         }
 
-
-        // ==========================================
+      // ==========================================
         // VERIFICATION DE L'ADMINISTRATEUR AUTORISE
         // ==========================================
 
-        const ADMIN_EMAIL =
-            "rendis2027bassam@gmail.com";
-
-
-        if (
+    const ADMIN_EMAILS = [
+    "rendis2027bassam@gmail.com",
+    "beniealex@gmail.com"
+];
+       if (
             session.user.email.toLowerCase() !==
             ADMIN_EMAIL.toLowerCase()
         ) {
 
             await supabaseClient.auth.signOut();
-
+           
             window.location.href = "admin.html";
 
             return;
