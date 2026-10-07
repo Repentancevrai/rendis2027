@@ -65,8 +65,7 @@ async function loadStats() {
 }
 // ==================== PRÉCOMMANDES ====================
 const ORDER_PRICES = {
-  
-  economiqueQty: 10000,
+    economiqueQty: 10000,
   premiumQty: 20000,
   pagnePieceQty: 7000,
   pagneBleuQty: 6000,
@@ -77,10 +76,8 @@ const ORDER_PRICES = {
   sacQty: 4000,
   casquetteQty: 5000
 };
-
 const ORDER_LABELS = {
-  
-  economiqueQty: "Pin Économique",
+    economiqueQty: "Pin Économique",
   premiumQty: "Pin Premium",
   pagnePieceQty: "Pagne officiel",
   pagneBleuQty: "Pagne bleu",
@@ -122,7 +119,6 @@ if (orderForm) {
     const sector = clean(fd.get("city"));
 const comment = clean(fd.get("message"));
 const { total, items } = getOrderData();
-
 if (!name || !phone || total <= 0 || !items.length) {
   setMessage(
     orderMessage,
@@ -130,7 +126,6 @@ if (!name || !phone || total <= 0 || !items.length) {
   );
   return;
 }
-
 if (!sector) {
   setMessage(
     orderMessage,
@@ -138,7 +133,6 @@ if (!sector) {
   );
   return;
 }
-
 if (!supabaseClient) {
   setMessage(
     orderMessage,
@@ -146,14 +140,12 @@ if (!supabaseClient) {
   );
   return;
 }
-
 const details = [
   "[PRECOMMANDE]",
   `Articles: ${items.join(", ")}`,
   `Secteur: ${sector}`,
   comment ? `Commentaire: ${comment}` : ""
 ].filter(Boolean).join(" | ");
-
 const payload = {
   name,
   phone,
@@ -161,90 +153,77 @@ const payload = {
   message: details,
   status: "A_VERIFIER"
 };
-
 try {
   setMessage(orderMessage, "Précommande en cours d'enregistrement...");
-
   const { error } = await supabaseClient
     .from("contributions")
     .insert(payload);
-
   if (error) throw error;
-
   loadStats();
-
   setMessage(
     orderMessage,
     "Précommande enregistrée. Vous allez maintenant contacter le représentant de votre secteur."
   );
-
   const normalizedSector = sector
   .toLowerCase()
   .normalize("NFD")
   .replace(/[\u0300-\u036f]/g, "");
-
-const contacts = {
-  bassam: "2250141272857",
-  koreMme: "2250708193456",
-  bonoua: "2250759310155",
-  aboisso: "2250747257919",
-  koumassi: "2250152016099",
-  portBouet: "2250102676721"
-};
-
 let whatsappNumber = "";
 let contactName = "";
-
 if (
   normalizedSector.includes("bassam") ||
   normalizedSector.includes("grand-bassam") ||
   normalizedSector.includes("diaspora")
 ) {
-  whatsappNumber = contacts.bassam;
-  contactName = "M. KORÉ";
+  whatsappNumber = "2250141272857";
+  contactName = "Couples KORÉ";
 } else if (normalizedSector.includes("bonoua")) {
-  whatsappNumber = contacts.bonoua;
+  whatsappNumber = "2250759310155";
   contactName = "Mme Dihi Effoua";
 } else if (
   normalizedSector.includes("aboisso") ||
   normalizedSector.includes("ehania")
 ) {
-  whatsappNumber = contacts.aboisso;
+  whatsappNumber = "2250747257919";
   contactName = "Mme BAH SEBO";
 } else if (normalizedSector.includes("koumassi")) {
-  whatsappNumber = contacts.koumassi;
+  whatsappNumber = "2250152016099";
   contactName = "Anne Sery";
 } else if (
   normalizedSector.includes("port-bouet") ||
   normalizedSector.includes("port bouet")
 ) {
-  whatsappNumber = contacts.portBouet;
+  whatsappNumber = "2250102676721";
   contactName = "MATATA YAO";
 }
-
-if (whatsappNumber) {
-  const whatsappMessage =
-    `Bonjour ${contactName}, je viens du site RENDIS 2027.%0A%0A` +
-    `👤 Nom : ${encodeURIComponent(name)}%0A` +
-    `📞 Téléphone : ${encodeURIComponent(phone)}%0A` +
-    `📍 Secteur : ${encodeURIComponent(sector)}%0A%0A` +
-    `🛒 PRÉCOMMANDE :%0A` +
-    `${encodeURIComponent(items.join("\n"))}%0A%0A` +
-    `💰 TOTAL : ${encodeURIComponent(money(total))}%0A` +
-    (comment
-      ? `💬 Commentaire : ${encodeURIComponent(comment)}`
-      : "");
-
-  window.open(
-    `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
-    "_blank"
+if (!whatsappNumber) {
+  setMessage(
+    orderMessage,
+    "Le secteur indiqué ne correspond à aucun représentant. Veuillez vérifier votre secteur."
   );
-} else {
-  const contactSection = document.getElementById("paiements");
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: "smooth" });
-  }
+  return;
 }
+/* ================= MESSAGE WHATSAPP COMPLET ================= */
+const whatsappMessage = [
+  `Bonjour ${contactName}, je viens du site RENDIS 2027.`,
+  "",
+  `👤 Nom : ${name}`,
+  `📞 Téléphone : ${phone}`,
+  `📍 Secteur : ${sector}`,
+  "",
+  "🛒 PRÉCOMMANDE :",
+  items.join("\n"),
+  "",
+  `💰 TOTAL : ${money(total)}`,
+  comment ? `💬 Commentaire : ${comment}` : ""
+]
+  .filter(Boolean)
+  .join("\n");
+/* ================= OUVERTURE WHATSAPP ================= */
+window.open(
+  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
+  "_blank"
+);
 }
 catch (error) {  console.error("Erreur précommande :", error);
       const code = clean(error?.code);
