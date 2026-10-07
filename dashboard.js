@@ -97,9 +97,8 @@ async function initDashboard() {
     "beniealex@gmail.com"
 ];
        if (
-            session.user.email.toLowerCase() !==
-            ADMIN_EMAIL.toLowerCase()
-        ) {
+    !ADMIN_EMAILS.includes(session.user.email.toLowerCase())
+) {
 
             await supabaseClient.auth.signOut();
            
