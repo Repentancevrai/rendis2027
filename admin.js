@@ -69,9 +69,9 @@ form.addEventListener("submit", async (event) => {
   }
 if (data.user) {
   // Vérification directe de l'adresse e-mail administrateur
-  const ADMIN_EMAIL = "rendis2027bassam@gmail.com";
+  const ADMIN_EMAILS = ["rendis2027bassam@gmail.com", "beniealex@gmail.com"];
 
-  if (data.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+if (!ADMIN_EMAILS.includes(data.user.email.toLowerCase())) {
     showMessage(
       "Accès refusé. Vous n'avez pas les droits administrateur.",
       "error"
