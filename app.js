@@ -203,22 +203,37 @@ if (!whatsappNumber) {
   );
   return;
 }
-/* ================= MESSAGE WHATSAPP COMPLET ================= */
+const selectedWhatsAppItems = [];
+
+for (const [field, price] of Object.entries(ORDER_PRICES)) {
+  const quantity = Math.max(0, Number(new FormData(orderForm).get(field)) || 0);
+
+  if (quantity > 0) {
+    selectedWhatsAppItems.push(
+      `${ORDER_LABELS[field]} × ${quantity} — ${money(quantity * price)}`
+    );
+  }
+}
+
+const totalSelectedQuantity = Object.values(ORDER_PRICES).reduce((count, price, index) => {
+  const field = Object.keys(ORDER_PRICES)[index];
+  const quantity = Math.max(0, Number(new FormData(orderForm).get(field)) || 0);
+  return count + quantity;
+}, 0);
+
+const whatsappGreeting = new Date().getHours() < 18 ? "Bonjour" : "Bonsoir";
+
 const whatsappMessage = [
-  `Bonjour ${contactName}, je viens du site RENDIS 2027.`,
+  `${whatsappGreeting}, je viens du site RENDIS 2027. Je souhaite finaliser ma commande ou ma contribution :`,
   "",
-  `👤 Nom : ${name}`,
-  `📞 Téléphone : ${phone}`,
-  `📍 Secteur : ${sector}`,
+  "🛒 Mon panier RENDIS 2027",
+  `${selectedWhatsAppItems.length} article${selectedWhatsAppItems.length > 1 ? "s" : ""} sélectionné${selectedWhatsAppItems.length > 1 ? "s" : ""}`,
   "",
-  "🛒 PRÉCOMMANDE :",
-  items.join("\n"),
+  "Comment Finaliser ma précommande?",
+  ...selectedWhatsAppItems,
   "",
-  `💰 TOTAL : ${money(total)}`,
-  comment ? `💬 Commentaire : ${comment}` : ""
-]
-  .filter(Boolean)
-  .join("\n");
+  `Total : ${money(total)}`
+].join("\n");
 /* ================= OUVERTURE WHATSAPP ================= */
 window.open(
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
