@@ -1,0 +1,26 @@
+{
+  "name": "RENDIS 2027",
+  "short_name": "RENDIS 2027",
+  "description": "RENDIS 2027 — plateforme de mobilisation et de suivi des contributions.",
+  "lang": "fr-CI",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f59e0b",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icons/rendis-192.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/rendis-512.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
