@@ -1,3 +1,4 @@
+
 {
   "name": "RENDIS 2027",
   "short_name": "RENDIS 2027",
@@ -11,16 +12,16 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "icons/rendis-192.svg",
-      "type": "image/svg+xml",
+      "src": "./rendis-192.png",
+      "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/rendis-512.svg",
-      "type": "image/svg+xml",
+      "src": "./rendis-512.png",
+      "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
