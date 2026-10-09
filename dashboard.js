@@ -1,4 +1,4 @@
-// ==========================================
+de// ==========================================
 // RENDIS 2027 - TABLEAU DE BORD ADMIN
 // ==========================================
 
@@ -92,9 +92,10 @@ async function initDashboard() {
         // VERIFICATION DE L'ADMINISTRATEUR AUTORISE
         // ==========================================
 
-    const ADMIN_EMAILS = [
-    "rendis2027bassam@gmail.com",
-    "beniealex@gmail.com"
+const ADMIN_EMAILS = [
+"rendis2027bassam@gmail.com",
+"beniealex@gmail.com",
+"benieperpetueflore@gmail.com"
 ];
        if (
     !ADMIN_EMAILS.includes(session.user.email.toLowerCase())
