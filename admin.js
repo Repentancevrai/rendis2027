@@ -69,7 +69,7 @@ form.addEventListener("submit", async (event) => {
   }
 if (data.user) {
   // Vérification directe de l'adresse e-mail administrateur
-  const ADMIN_EMAILS = ["rendis2027bassam@gmail.com", "beniealex@gmail.com"];
+const ADMIN_EMAILS = ["rendis2027bassam@gmail.com", "beniealex@gmail.com", "benieperpetueflore@gmail.com"];  
 
 if (!ADMIN_EMAILS.includes(data.user.email.toLowerCase())) {
     showMessage(
