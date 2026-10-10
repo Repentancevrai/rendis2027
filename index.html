@@ -868,4 +868,12 @@ Votre navigateur ne prend pas en charge la lecture audio.
 </main>
 <footer><div class="container">© 2027 RENDIS — Grand-Bassam, Côte d’Ivoire. Tous droits réservés.</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js?v=20261003-1"></script>
-</body></html>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error("Erreur PWA :", error));
+  });
+}
+</script></body></html>
