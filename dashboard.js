@@ -94,7 +94,8 @@ async function initDashboard() {
 
     const ADMIN_EMAILS = [
     "rendis2027bassam@gmail.com",
-    "beniealex@gmail.com"
+    "beniealex@gmail.com",
+    "benieperpetueflore@gmail.com"
 ];
        if (
     !ADMIN_EMAILS.includes(session.user.email.toLowerCase())
