@@ -140,30 +140,55 @@ if (!supabaseClient) {
   );
   return;
 }
-const details = [
-  "[PRECOMMANDE]",
-  `Articles: ${items.join(", ")}`,
-  `Secteur: ${sector}`,
-  comment ? `Commentaire: ${comment}` : ""
-].filter(Boolean).join(" | ");
-const payload = {
-  name,
-  phone,
-  amount: total,
-  message: details,
-  status: "A_VERIFIER"
-};
+
+const reference = `RENDIS-${Date.now()}`;
+
 try {
-  setMessage(orderMessage, "Précommande en cours d'enregistrement...");
+  setMessage(orderMessage, "Enregistrement de votre précommande...");
+
+  const preorderRows = [];
+
+  for (const [field, unitPrice] of Object.entries(ORDER_PRICES)) {
+    const quantity = Math.max(
+      0,
+      Number(fd.get(field)) || 0
+    );
+
+    if (quantity > 0) {
+      preorderRows.push({
+        customer_name: name,
+        phone: phone,
+        city: sector,
+        product_type: ORDER_LABELS[field],
+        product_variant: items.join(", "),
+        quantity: quantity,
+        unit_price: unitPrice,
+        total_amount: quantity * unitPrice,
+        status: "PENDING",
+        reference: reference
+      });
+    }
+  }
+
   const { error } = await supabaseClient
-    .from("contributions")
-    .insert(payload);
+    .from("preorders")
+    .insert(preorderRows);
+
   if (error) throw error;
-  loadStats();
+
   setMessage(
     orderMessage,
     "Précommande enregistrée. Vous allez maintenant contacter le représentant de votre secteur."
   );
+} catch (error) {
+  console.error("Erreur précommande :", error);
+  setMessage(
+    orderMessage,
+    "Impossible d'enregistrer votre précommande. Veuillez réessayer."
+  );
+  return;
+}
+      
   const normalizedSector = sector
   .toLowerCase()
   .normalize("NFD")
