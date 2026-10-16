@@ -264,7 +264,7 @@ window.open(
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
   "_blank"
 );
-  });
+  );
   updateOrderTotal();
 }
 // ==================== CONTRIBUTION FINANCIÈRE ====================
