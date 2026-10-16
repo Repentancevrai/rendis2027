@@ -264,20 +264,7 @@ window.open(
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
   "_blank"
 );
-}
-catch (error) {  console.error("Erreur précommande :", error);
-      const code = clean(error?.code);
-      const message = clean(error?.message);
-      const details = clean(error?.details);
-      const hint = clean(error?.hint);
-      const diagnostic = [
-        "Erreur Supabase détectée.",
-        code ? `Code: ${code}` : "",
-        message ? `Message: ${message}` : "",
-        details ? `Détails: ${details}` : "",
-        hint ? `Conseil: ${hint}` : ""
-      ].filter(Boolean).join(" | ");
-      setMessage(orderMessage, diagnostic || "Erreur inconnue lors de l'enregistrement.");
+} 
     }
   });
   updateOrderTotal();
