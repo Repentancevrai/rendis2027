@@ -260,7 +260,13 @@ const whatsappMessage = [
   `Total : ${money(total)}`
 ].join("\n");
 /* ================= OUVERTURE WHATSAPP ================= */
-
+window.open(
+  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
+  "_blank"
+);
+  });
+  updateOrderTotal();
+}
 // ==================== CONTRIBUTION FINANCIÈRE ====================
 if (contributionForm) {
   contributionForm.addEventListener("submit", async (e) => {
