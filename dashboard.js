@@ -152,82 +152,82 @@ async function initDashboard() {
 // ==========================================
 
 async function loadDashboardStats() {
+  try {
+    const { data: contributions, error: contributionsError } =
+      await supabaseClient
+        .from("contributions")
+        .select("amount, status");
 
-    try {
-
-        const { data, error } = await supabaseClient
-            .from("contributions")
-            .select("*");
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-
-const contributions = data || [];
-
-// Contributions validées uniquement
-const contributionsValidees = contributions.filter(
-    contribution => contribution.status === "VALIDE"
-);
-
-// Nombre de contributions validées
-const total = contributionsValidees.length;
-
-// Montant total des contributions validées
-const montant = contributionsValidees.reduce(
-    (somme, contribution) => {
-        return somme + Number(contribution.amount || 0);
-    },
-    0
-);
-
-// Contributions à vérifier
-const enAttente = contributions.filter(
-    contribution => contribution.status === "A_VERIFIER"
-).length;
-
-
-        // Affichage du montant total
-        if (totalAmount) {
-
-            totalAmount.textContent =
-                montant.toLocaleString("fr-FR") +
-                " FCFA";
-
-        }
-
-
-        // Affichage du nombre total
-        if (totalContributions) {
-
-            totalContributions.textContent =
-                total;
-
-        }
-
-
-        // Affichage du nombre à vérifier
-        if (pendingContributions) {
-
-            pendingContributions.textContent =
-           enAttente;
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Erreur lors du chargement des statistiques :",
-            error
-        );
-
+    if (contributionsError) {
+      throw contributionsError;
     }
 
+    const allContributions = contributions || [];
+
+    const validContributions = allContributions.filter(
+      (item) =>
+        String(item.status || "").toUpperCase() === "VALIDE"
+    );
+
+    const pendingContributions = allContributions.filter(
+      (item) =>
+        String(item.status || "").toUpperCase() === "A_VERIFIER"
+    );
+
+    const contributionTotal = validContributions.reduce(
+      (sum, item) => sum + Number(item.amount || 0),
+      0
+    );
+
+    const contributionCount = validContributions.length;
+    const pendingCount = pendingContributions.length;
+
+    const { data: preorders, error: preordersError } =
+      await supabaseClient
+        .from("preorders")
+        .select("quantity, total_amount");
+
+    if (preordersError) {
+      throw preordersError;
+    }
+
+    const preorderRows = preorders || [];
+
+    const preorderTotal = preorderRows.reduce(
+      (sum, item) =>
+        sum + Number(item.total_amount || 0),
+      0
+    );
+
+    const totalAmount = document.getElementById("totalAmount");
+    const totalContributions =
+      document.getElementById("totalContributions");
+    const pendingContributionsEl =
+      document.getElementById("pendingContributions");
+    const totalPreorders =
+      document.getElementById("totalPreorders");
+
+    if (totalAmount) {
+      totalAmount.textContent =
+        contributionTotal.toLocaleString("fr-FR") + " FCFA";
+    }
+
+    if (totalContributions) {
+      totalContributions.textContent = contributionCount;
+    }
+
+    if (pendingContributionsEl) {
+      pendingContributionsEl.textContent = pendingCount;
+    }
+
+    if (totalPreorders) {
+      totalPreorders.textContent =
+        preorderTotal.toLocaleString("fr-FR") + " FCFA";
+    }
+
+  } catch (error) {
+    console.error("Erreur lors du chargement des statistiques :", error);
+  }
 }
 
 
