@@ -169,7 +169,6 @@ try {
       });
     }
   }
-
   const { error } = await supabaseClient
     .from("preorders")
     .insert(preorderRows);
