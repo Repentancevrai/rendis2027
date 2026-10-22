@@ -165,7 +165,7 @@ try {
         unit_price: unitPrice,
         total_amount: quantity * unitPrice,
         status: "PENDING",
-        reference: reference
+        reference: `${reference}-${field}`
       });
     }
   }
