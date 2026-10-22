@@ -200,8 +200,8 @@ if (
   normalizedSector.includes("grand-bassam") ||
   normalizedSector.includes("diaspora")
 ) {
-  whatsappNumber = "2250141272857";
-  contactName = "Couples KORÉ";
+  whatsappNumber = "225050504431977";
+  contactName = "Frère KORÉ";
 } else if (normalizedSector.includes("bonoua")) {
   whatsappNumber = "2250759310155";
   contactName = "Mme Dihi Effoua";
