@@ -106,164 +106,187 @@ function updateOrderTotal() {
   const { total } = getOrderData();
   if (orderTotal) orderTotal.textContent = money(total);
 }
+// ==================== PRÉCOMMANDES ET WHATSAPP ====================
 if (orderForm) {
   orderForm.addEventListener("input", updateOrderTotal);
   orderForm.addEventListener("change", updateOrderTotal);
+
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     setMessage(orderMessage, "");
+
     const fd = new FormData(orderForm);
     const name = clean(fd.get("name"));
     const phone = clean(fd.get("phone"));
-    const city = clean(fd.get("city"));
     const sector = clean(fd.get("city"));
-const comment = clean(fd.get("message"));
-const { total, items } = getOrderData();
-if (!name || !phone || total <= 0 || !items.length) {
-  setMessage(
-    orderMessage,
-    "Veuillez remplir votre nom, votre téléphone, votre secteur et choisir au moins un article."
-  );
-  return;
-}
-if (!sector) {
-  setMessage(
-    orderMessage,
-    "Veuillez indiquer votre secteur."
-  );
-  return;
-}
-if (!supabaseClient) {
-  setMessage(
-    orderMessage,
-    "La connexion Supabase doit encore être configurée."
-  );
-  return;
-}
+    const country = clean(fd.get("country") || fd.get("pays"));
+    const comment = clean(fd.get("message"));
+    const { total, items } = getOrderData();
 
-const reference = `RENDIS-${Date.now()}`;
-
-try {
-  setMessage(orderMessage, "Enregistrement de votre précommande...");
-
-  const preorderRows = [];
-
-  for (const [field, unitPrice] of Object.entries(ORDER_PRICES)) {
-    const quantity = Math.max(
-      0,
-      Number(fd.get(field)) || 0
-    );
-
-    if (quantity > 0) {
-      preorderRows.push({
-        customer_name: name,
-        phone: phone,
-        city: sector,
-        product_type: ORDER_LABELS[field],
-        product_variant: items.join(", "),
-        quantity: quantity,
-        unit_price: unitPrice,
-        total_amount: quantity * unitPrice,
-        status: "PENDING",
-        reference: `${reference}-${field}`
-      });
+    if (!name || !phone || !sector || total <= 0 || !items.length) {
+      setMessage(
+        orderMessage,
+        "Veuillez remplir votre nom, votre téléphone et votre secteur, puis choisir au moins un article."
+      );
+      return;
     }
-  }
-  const { error } = await supabaseClient
-    .from("preorders")
-    .insert(preorderRows);
 
-  if (error) throw error;
+    // Identification du point focal : numéros conservés
+    const normalizedSector = sector
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[_-]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
 
-  setMessage(
-    orderMessage,
-    "Précommande enregistrée. Vous allez maintenant contacter le représentant de votre secteur."
-  );
-} catch (error) {
-  console.error("Erreur précommande :", error);
-  setMessage(
-    orderMessage,
-    "Impossible d'enregistrer votre précommande. Veuillez réessayer."
-  );
-  return;
-}
-      
-  const normalizedSector = sector
-  .toLowerCase()
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "");
-let whatsappNumber = "";
-let contactName = "";
-if (
-  normalizedSector.includes("bassam") ||
-  normalizedSector.includes("grand-bassam") ||
-  normalizedSector.includes("diaspora")
-) {
-  whatsappNumber = "2250504431977";
-  contactName = "Frère KORÉ";
-} else if (normalizedSector.includes("bonoua")) {
-  whatsappNumber = "2250759310155";
-  contactName = "Mme Dihi Effoua";
-} else if (
-  normalizedSector.includes("aboisso") ||
-  normalizedSector.includes("ehania")
-) {
-  whatsappNumber = "2250747257919";
-  contactName = "Mme BAH SEBO";
-} else if (normalizedSector.includes("koumassi")) {
-  whatsappNumber = "2250152016099";
-  contactName = "Anne Sery";
-} else if (
-  normalizedSector.includes("port-bouet") ||
-  normalizedSector.includes("port bouet")
-) {
-  whatsappNumber = "2250102676721";
-  contactName = "MATATA YAO";
-}
-if (!whatsappNumber) {
-  setMessage(
-    orderMessage,
-    "Le secteur indiqué ne correspond à aucun représentant. Veuillez vérifier votre secteur."
-  );
-  return;
-}
-const selectedWhatsAppItems = [];
+    let whatsappNumber = "";
+    let contactName = "";
 
-for (const [field, price] of Object.entries(ORDER_PRICES)) {
-  const quantity = Math.max(0, Number(new FormData(orderForm).get(field)) || 0);
+    if (
+      normalizedSector.includes("bassam") ||
+      normalizedSector.includes("diaspora")
+    ) {
+      whatsappNumber = "2250504431977";
+      contactName = "Frère KORÉ";
+    } else if (normalizedSector.includes("bonoua")) {
+      whatsappNumber = "2250759310155";
+      contactName = "Mme Dihi Effoua";
+    } else if (
+      normalizedSector.includes("aboisso") ||
+      normalizedSector.includes("ehania")
+    ) {
+      whatsappNumber = "2250747257919";
+      contactName = "Mme BAH SEBO";
+    } else if (normalizedSector.includes("koumassi")) {
+      whatsappNumber = "2250152016099";
+      contactName = "Anne Sery";
+    } else if (normalizedSector.includes("port bouet")) {
+      whatsappNumber = "2250102676721";
+      contactName = "MATATA YAO";
+    }
 
-  if (quantity > 0) {
-    selectedWhatsAppItems.push(
-      `${ORDER_LABELS[field]} × ${quantity} — ${money(quantity * price)}`
-    );
-  }
-}
+    if (!whatsappNumber) {
+      setMessage(
+        orderMessage,
+        "Aucun point focal n'est associé à cette localité. Votre commande n'a pas été enregistrée. Contactez l'équipe RENDIS 2027 pour connaître le représentant compétent."
+      );
+      return;
+    }
 
-const totalSelectedQuantity = Object.values(ORDER_PRICES).reduce((count, price, index) => {
-  const field = Object.keys(ORDER_PRICES)[index];
-  const quantity = Math.max(0, Number(new FormData(orderForm).get(field)) || 0);
-  return count + quantity;
-}, 0);
+    if (!supabaseClient) {
+      setMessage(
+        orderMessage,
+        "La connexion Supabase doit être configurée."
+      );
+      return;
+    }
 
-const whatsappGreeting = new Date().getHours() < 18 ? "Bonjour" : "Bonsoir";
+    // Préparation du panier réel
+    const reference = `RENDIS-${Date.now()}`;
+    const preorderRows = [];
+    const selectedWhatsAppItems = [];
+    let totalSelectedQuantity = 0;
 
-const whatsappMessage = [
-  `${whatsappGreeting}, je viens du site RENDIS 2027. Je souhaite finaliser ma commande ou ma contribution :`,
-  "",
-  "🛒 Mon panier RENDIS 2027",
-  `${selectedWhatsAppItems.length} article${selectedWhatsAppItems.length > 1 ? "s" : ""} sélectionné${selectedWhatsAppItems.length > 1 ? "s" : ""}`,
-  "",
-  "Comment Finaliser ma précommande?",
-  ...selectedWhatsAppItems,
-  "",
-  `Total : ${money(total)}`
-].join("\n");
-/* ================= OUVERTURE WHATSAPP ================= */
-window.open(
-  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
-  "_blank"
-);
+    for (const [field, unitPrice] of Object.entries(ORDER_PRICES)) {
+      const quantity = Math.max(0, Number(fd.get(field)) || 0);
+
+      if (quantity > 0) {
+        const lineTotal = quantity * unitPrice;
+
+        preorderRows.push({
+          customer_name: name,
+          phone: phone,
+          city: sector,
+          product_type: ORDER_LABELS[field],
+          product_variant: ORDER_LABELS[field],
+          quantity: quantity,
+          unit_price: unitPrice,
+          total_amount: lineTotal,
+          status: "PENDING",
+          reference: `${reference}-${field}`
+        });
+
+        selectedWhatsAppItems.push(
+          `${ORDER_LABELS[field]} × ${quantity} — ${money(lineTotal)}`
+        );
+
+        totalSelectedQuantity += quantity;
+      }
+    }
+
+    if (!preorderRows.length) {
+      setMessage(
+        orderMessage,
+        "Votre panier est vide. Veuillez choisir au moins un article."
+      );
+      return;
+    }
+
+    // Préparer le message destiné au point focal
+    const whatsappMessage = [
+      `Bonjour ${contactName},`,
+      "",
+      "Une nouvelle commande ou précommande a été initiée sur le site RENDIS 2027.",
+      "",
+      "👤 INFORMATIONS DU CLIENT",
+      `Nom et prénom : ${name}`,
+      `Contact : ${phone}`,
+      `Pays : ${country || "Non renseigné"}`,
+      `Ville / secteur : ${sector}`,
+      "",
+      "🛒 MON PANIER RENDIS 2027",
+      `Nombre total d’articles : ${totalSelectedQuantity}`,
+      "",
+      ...selectedWhatsAppItems,
+      "",
+      `TOTAL DE LA COMMANDE : ${money(total)}`,
+      "",
+      "💳 CONFIRMATION DU PAIEMENT",
+      "Après avoir effectué le paiement selon les instructions communiquées par le point focal, le client devra envoyer la capture d’écran ou le justificatif du paiement pour vérification.",
+      "",
+      `Commentaire du client : ${comment || "Aucun commentaire renseigné"}`,
+      "",
+      "Merci de prendre cette demande en compte et d’accompagner le client jusqu’à la confirmation de sa commande. 🙏🏽",
+      "",
+      "RENDIS 2027 — Mobilisons-nous ensemble.",
+      "",
+      `Référence de la précommande : ${reference}`
+    ].join("\n");
+
+    // Enregistrement avant ouverture de WhatsApp
+    try {
+      setMessage(
+        orderMessage,
+        "Enregistrement de votre précommande..."
+      );
+
+      const { error } = await supabaseClient
+        .from("preorders")
+        .insert(preorderRows);
+
+      if (error) throw error;
+
+      const whatsappUrl =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+      window.open(whatsappUrl, "_blank");
+
+      setMessage(
+        orderMessage,
+        "Précommande enregistrée. Vérifiez le message WhatsApp et appuyez sur Envoyer pour le transmettre au point focal. Le paiement reste à vérifier."
+      );
+
+    } catch (error) {
+      console.error("Erreur précommande :", error);
+
+      setMessage(
+        orderMessage,
+        "Impossible d'enregistrer votre précommande. Veuillez réessayer."
+      );
+    }
   });
+
   updateOrderTotal();
 }
 // ==================== CONTRIBUTION FINANCIÈRE ====================
