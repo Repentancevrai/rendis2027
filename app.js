@@ -119,7 +119,13 @@ if (orderForm) {
     const name = clean(fd.get("name"));
     const phone = clean(fd.get("phone"));
     const sector = clean(fd.get("city"));
-    const country = clean(fd.get("country") || fd.get("pays"));
+    const country = clean(
+  fd.get("locationType") === "ci"
+    ? "Côte d’Ivoire"
+    : fd.get("locationType") === "diaspora"
+      ? "Diaspora"
+      : fd.get("country") || fd.get("pays")
+);
     const comment = clean(fd.get("message"));
     const { total, items } = getOrderData();
 
