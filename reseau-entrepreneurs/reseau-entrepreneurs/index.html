@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réseau des Entrepreneurs de Grand-Bassam">
+  <title>Réseau des Entrepreneurs | Grand-Bassam</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <span class="brand-icon">🤝</span>
+    <div>
+      <strong>RÉSEAU DES ENTREPRENEURS</strong>
+      <small>GRAND-BASSAM</small>
+    </div>
+  </div>
+  <button id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+  <nav id="main-nav">
+    <a href="#accueil">Accueil</a>
+    <a href="#annuaire">Annuaire</a>
+    <a href="#opportunites">Opportunités</a>
+    <a href="#formations">Formations</a>
+    <a href="#inscription">Adhésion</a>
+  </nav>
+</header>
+
+<main>
+  <section id="accueil" class="hero">
+    <p class="eyebrow">ENSEMBLE, CONSTRUISONS L'AVENIR</p>
+    <h1>Entreprendre.<br>Collaborer.<br>Progresser ensemble.</h1>
+    <p>Un réseau professionnel réservé aux membres de l'Église de Grand-Bassam.</p>
+    <a class="btn" href="#inscription">Demander mon adhésion</a>
+  </section>
+
+  <section class="intro">
+    <h2>Bienvenue dans notre réseau</h2>
+    <p>Valoriser les talents, rapprocher les entrepreneurs et développer les opportunités professionnelles dans un esprit de solidarité.</p>
+  </section>
+
+  <section id="annuaire">
+    <h2>Annuaire professionnel</h2>
+    <p>Découvrez les activités des membres du réseau.</p>
+    <input id="search-member" type="search" placeholder="Rechercher une activité ou un métier...">
+    <div id="members-list" class="cards">
+      <p>Les profils des membres apparaîtront ici.</p>
+    </div>
+  </section>
+
+  <section id="opportunites">
+    <h2>Opportunités et partenariats</h2>
+    <div id="opportunities-list" class="cards">
+      <p>Les opportunités seront publiées ici.</p>
+    </div>
+  </section>
+
+  <section id="formations">
+    <h2>Formations et conseils</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Développer son activité</h3>
+        <p>Conseils pratiques pour mieux organiser et faire progresser son entreprise.</p>
+      </article>
+      <article class="card">
+        <h3>Collaborer efficacement</h3>
+        <p>Créer des partenariats et développer des relations professionnelles durables.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="inscription">
+    <h2>Demande d'adhésion</h2>
+    <p>Réservé aux membres de l'Église. Toute demande sera examinée par les responsables désignés.</p>
+    <form id="membership-form">
+      <label>Nom et prénoms
+        <input name="fullname" required>
+      </label>
+      <label>Assemblée ou communauté
+        <input name="community" required>
+      </label>
+      <label>Activité professionnelle
+        <input name="activity" required>
+      </label>
+      <label>Secteur d'activité
+        <select name="sector" required>
+          <option value="">Choisir un secteur</option>
+          <option>Commerce et distribution</option>
+          <option>Artisanat et métiers manuels</option>
+          <option>Couture, mode et beauté</option>
+          <option>Bâtiment et immobilier</option>
+          <option>Transport et logistique</option>
+          <option>Agriculture et élevage</option>
+          <option>Informatique et numérique</option>
+          <option>Restauration et alimentation</option>
+          <option>Services professionnels</option>
+          <option>Autre</option>
+        </select>
+      </label>
+      <label>Téléphone
+        <input name="phone" type="tel" required>
+      </label>
+      <label>Localisation
+        <input name="location" required>
+      </label>
+      <label>Présentation de votre activité
+        <textarea name="description" rows="4"></textarea>
+      </label>
+      <button class="btn" type="submit">Envoyer ma demande</button>
+    </form>
+    <p class="notice">Prototype de démonstration : aucune demande réelle n'est transmise ni enregistrée.</p>
+  </section>
+
+  <section id="administration">
+    <h2>Espace administration</h2>
+    <p>Accès réservé aux responsables autorisés par l'Église. Les demandes seront validées après vérification.</p>
+  </section>
+</main>
+
+<footer>
+  <strong>Réseau des Entrepreneurs de Grand-Bassam</strong>
+  <p>ENTREPRENDRE · COLLABORER · PROGRESSER ENSEMBLE</p>
+  <small>Projet indépendant — Prototype en préparation</small>
+</footer>
+
+<script src="app.js"></script>
+</body>
+  </html>
+  
