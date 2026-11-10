@@ -29,8 +29,6 @@ function setMessage(element, text) {
   if (element) element.textContent = text;
 }
 // ==================== STATISTIQUES ====================
-
-// ==================== STATISTIQUES ====================
 async function loadStats() {
   const OFFLINE_MOBILISATION = 10000000;
 
