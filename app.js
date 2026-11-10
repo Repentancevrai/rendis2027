@@ -29,40 +29,60 @@ function setMessage(element, text) {
   if (element) element.textContent = text;
 }
 // ==================== STATISTIQUES ====================
+
+// ==================== STATISTIQUES ====================
 async function loadStats() {
+  const OFFLINE_MOBILISATION = 10000000;
+
+  const goal = Number(cfg.GOAL_FCFA) || 60000000;
+
+  const validatedCount = document.getElementById("validatedCount");
+  const pendingCount = document.getElementById("pendingCount");
+  const amountRaised = document.getElementById("amountRaised");
+  const progressBar = document.getElementById("progressBar");
+
   if (!supabaseClient) return;
+
   try {
     const { data, error } = await supabaseClient
       .from("contributions")
       .select("amount,status");
+
     if (error) throw error;
+
     let validated = 0;
     let pending = 0;
-    let total = 0;
+    let onlineTotal = 0;
+
     for (const row of data || []) {
       const amount = Number(row.amount) || 0;
       const status = clean(row.status).toUpperCase();
-      if (status === "A_VERIFIER" || status === "A_VERIFER") pending++;
+
+      if (status === "A_VERIFIER" || status === "A_VERIFER") {
+        pending++;
+      }
+
       if (["VALIDE","VALIDEE","VERIFIED","VERIFIEE"].includes(status)) {
         validated++;
-        total += amount;
+        onlineTotal += amount;
       }
     }
-    const validatedCount = document.getElementById("validatedCount");
-    const pendingCount = document.getElementById("pendingCount");
-    const amountRaised = document.getElementById("amountRaised");
-    const progressBar = document.getElementById("progressBar");
+
+    const total = OFFLINE_MOBILISATION + onlineTotal;
+    const percentage = Math.min(100, (total / goal) * 100);
+
     if (validatedCount) validatedCount.textContent = validated;
     if (pendingCount) pendingCount.textContent = pending;
     if (amountRaised) amountRaised.textContent = money(total);
     if (progressBar) {
-      const goal = Number(cfg.GOAL_FCFA) || 60000000;
-      progressBar.style.width = Math.min(100, (total / goal) * 100) + "%";
+      progressBar.style.width = percentage + "%";
     }
+
   } catch (error) {
     console.error("Erreur statistiques Supabase :", error);
   }
 }
+
 // ==================== PRÉCOMMANDES ====================
 const ORDER_PRICES = {
     economiqueQty: 10000,
