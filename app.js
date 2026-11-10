@@ -31,13 +31,14 @@ function setMessage(element, text) {
 // ==================== STATISTIQUES ====================
 async function loadStats() {
   const OFFLINE_MOBILISATION = 10000000;
-
   const goal = Number(cfg.GOAL_FCFA) || 60000000;
 
   const validatedCount = document.getElementById("validatedCount");
   const pendingCount = document.getElementById("pendingCount");
   const amountRaised = document.getElementById("amountRaised");
   const progressBar = document.getElementById("progressBar");
+
+  const heroCard = document.querySelector(".hero-card");
 
   if (!supabaseClient) return;
 
@@ -67,13 +68,47 @@ async function loadStats() {
     }
 
     const total = OFFLINE_MOBILISATION + onlineTotal;
+    const remaining = Math.max(0, goal - total);
     const percentage = Math.min(100, (total / goal) * 100);
+    const remainingPercentage = Math.max(0, 100 - percentage);
+
+    const percentText = percentage.toLocaleString("fr-FR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+    const remainingPercentText = remainingPercentage.toLocaleString("fr-FR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
 
     if (validatedCount) validatedCount.textContent = validated;
     if (pendingCount) pendingCount.textContent = pending;
     if (amountRaised) amountRaised.textContent = money(total);
+
     if (progressBar) {
       progressBar.style.width = percentage + "%";
+    }
+
+    if (heroCard) {
+      const mobilizedText = heroCard.querySelector(".progress-label span");
+      const progressText = heroCard.querySelector(".progress + p");
+      const remainingText = heroCard.querySelector(".progress + p + p");
+
+      if (mobilizedText) {
+        mobilizedText.textContent = money(total) + " déjà mobilisés";
+      }
+
+      if (progressText) {
+        progressText.innerHTML =
+          "<strong>" + percentText + " %</strong> de l’objectif déjà mobilisé";
+      }
+
+      if (remainingText) {
+        remainingText.innerHTML =
+          "Reste à mobiliser : <strong>" + money(remaining) +
+          "</strong> (" + remainingPercentText + " %).";
+      }
     }
 
   } catch (error) {
