@@ -162,7 +162,7 @@ if (orderForm) {
       normalizedSector.includes("aboisso") ||
       normalizedSector.includes("ehania")
     ) {
-      whatsappNumber = "2250747257919";
+      whatsappNumber = "2250749806196";
       contactName = "Mme BAH SEBO";
     } else if (normalizedSector.includes("koumassi")) {
       whatsappNumber = "2250152016099";
